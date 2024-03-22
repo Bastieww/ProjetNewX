@@ -1,6 +1,14 @@
 <script setup>
 </script>
 
-<template>
 
+<template>
+    <section>
+        <p>Nom</p>
+        <p>Prenom</p>
+    </section>
 </template>
+
+<style>
+
+</style>
