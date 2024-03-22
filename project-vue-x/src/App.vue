@@ -10,7 +10,7 @@ import HelloWorld from './components/HelloWorld.vue'
 
       <nav>
         <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">Rechercher</RouterLink>
+        <RouterLink to="/search">Rechercher</RouterLink>
         <RouterLink to="/profile">Profile</RouterLink>
       </nav>
     </div>
@@ -21,10 +21,11 @@ import HelloWorld from './components/HelloWorld.vue'
 
 <style scoped>
   header{
-    background-color: rgb(21, 32, 43);
+    background-color: #15202b;
     padding: 20px;
   }
   nav{
+    list-style-type: none;
     position: fixed;
     top: 10px;
     right: 10px;

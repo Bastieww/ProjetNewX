@@ -4,7 +4,7 @@
 <template>
   <section>
     <header>
-      <h2>Bienvenue sur X</h2>
+      <h2>Y</h2>
 
     </header>
 
