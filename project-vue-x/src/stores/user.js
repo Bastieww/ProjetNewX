@@ -1,7 +1,7 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 
-export const useUserStore = defineStore('products', () => {
+export const useUserStore = defineStore('users', () => {
   
     const theUsers = ref([
         {
