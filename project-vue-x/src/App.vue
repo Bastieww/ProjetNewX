@@ -18,10 +18,6 @@
         <MenuComponent menuTEXT="Home" to="/"></MenuComponent>
         <MenuComponent menuTEXT="Explore" to="/search"></MenuComponent>
         <MenuComponent menuTEXT="Profile" to="/profile"></MenuComponent>
-
-      
-
-
       </nav>
       <div class="col2">
         <RouterView />
