@@ -1,0 +1,16 @@
+version: "3"
+services: 
+  db:
+    image: postgres
+    volumes:
+    - ./init.sql:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: projetnewx
+      POSTGRES_HOST: postgres
+      
+  app:
+    image: projetnewx
+    ports:
+      - 13000:3000
