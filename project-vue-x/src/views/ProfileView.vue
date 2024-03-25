@@ -10,7 +10,9 @@ const users = useUserStore()
   <div class="user-container">
     <div v-for="user in users.theUsers.slice(0, 1)">
       <div class="title">
-        <input onclick="javascript:history.go(-1);" class="go-back" type="image" src="/src/assets/img/left_arrow.png">
+        <svg onclick="javascript:history.go(-1);" class="go-back w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+          <path onclick="javascript:history.go(-1);" stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+        </svg>
         <h1>{{ user.name }}</h1>
       </div>
       <div class="user">
@@ -35,7 +37,6 @@ const users = useUserStore()
       </div>
     </div>
   </div>
-  <div class="col2"></div>
 </template>
 
 
@@ -64,6 +65,9 @@ const users = useUserStore()
   height: 30px;
   background-color: white;
   margin: 4px 10px 0px 5px;
+}
+.go-back:hover {
+  background-color: lightgray;
 }
 .profile-background {
   background-color: white;
