@@ -15,17 +15,14 @@ const filteredUsers = computed(() =>{
 
 <template>
   <div class="user-container">
-    <h1>Qui allez-vous rencontrer aujourd'hui ?</h1>
     <div class="search-container">
-      <input v-model="filter" style="width: 50% ; height: 20px;"  placeholder="Taper pour rechercher...">
+      <input v-model="filter" class="search" placeholder="Rechercher un utilisateur...">
     </div>
     <div class="user-list">
       <div v-for="user in filteredUsers" :key="user.name" class="user-card">
         <img :src="'/src/assets/img/' + user.profilepicture" class="user-profile-pic" alt="Profile Picture">
-        <div class="user-info">
-          <p class="user-name">{{ user.name }}</p>
-          <p class="user-bio">{{ user.bio }}</p>
-        </div>
+        <p class="user-name">{{ user.name }}</p>
+        <p class="user-bio">{{ user.bio }}</p>
       </div>
     </div>
   </div>
@@ -39,20 +36,20 @@ const filteredUsers = computed(() =>{
 }
 
 .search-container {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .user-list {
   margin: 0 auto;
-  max-width: 400px; /* Adjust as needed */
+  max-width: 75%;
   text-align: left;
 }
 
 .user-card {
   background-color: #ffffff;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
+  border-radius: 25px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  margin-bottom: 10px;
   padding: 15px;
   display: flex;
   align-items: center;
@@ -62,17 +59,25 @@ const filteredUsers = computed(() =>{
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  margin-right: 15px;
-}
-
-.user-info {
-  flex-grow: 1;
-  color: black;
+  margin-right: 15px; 
 }
 
 .user-name {
   font-weight: bold;
 }
+
+.search
+{
+  width: 75%; 
+  height: 20px; 
+
+  border-radius: 20px;
+  padding: 10px;
+  margin: 30px;
+
+  border-color: gray ;
+}
+
 
 /* Add additional styling for other user information if needed */
 </style>
