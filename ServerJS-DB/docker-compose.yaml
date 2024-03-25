@@ -1,15 +1,27 @@
 version: "3"
 services: 
-  db:
-    image: postgres
-    volumes:
-    - ./init.sql:/var/lib/postgresql/data
+  database:
+    image: mariadb
     environment:
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_USER: postgres
-      POSTGRES_DB: projetnewx
-      POSTGRES_HOST: postgres
-      
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: projetnewx
+      MYSQL_USER: mariadb
+      MYSQL_PASSWORD: mariadb
+
+    volumes:
+      - ./db-lib:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+  
+  
+  pma:
+    image: phpmyadmin/phpmyadmin
+    ports:
+    - 8123:80
+    environment:
+      PMA_ARBITRARY: 0
+      PMA_HOST: database
+      PMA_USER: root
+      PMA_PASSWORD: root
   app:
     image: projetnewx
     ports:

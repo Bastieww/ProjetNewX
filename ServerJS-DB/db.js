@@ -1,10 +1,10 @@
-const { Pool } = require('pg')
-const pool = new Pool({
-    host: 'db',
-    port: 5432,
-    user: 'postgres',
-    password: 'postgres',
+const mysql = require('mysql');
+const pool = mysql.createPool({
+    host: 'database',
+    port: 3306,
+    user: 'mariadb',
+    password: 'mariadb',
     database: 'projetnewx'
-})
+});
 
-module.exports = pool
+module.exports = pool;
