@@ -11,6 +11,7 @@ export const useUserStore = defineStore('users', () => {
             "certif": true,
             "mail": "ggremie@mail.com",
             "profilepicture": "image.png",
+            "joindate": "décembre 2022",
         },
         {
             "name": "Sky",
@@ -19,6 +20,7 @@ export const useUserStore = defineStore('users', () => {
             "certif": true,
             "mail": "sky@mail.com",
             "profilepicture": "image.png",
+            "joindate": "avril 2017",
         },
         {
             "name": "Bastieww",
@@ -27,6 +29,7 @@ export const useUserStore = defineStore('users', () => {
             "certif": false,
             "mail": "bastien@mail.com",
             "profilepicture": "image.png",
+            "joindate": "janvier 1998",
         }
         ])
 
