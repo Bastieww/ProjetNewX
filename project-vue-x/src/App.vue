@@ -52,6 +52,8 @@
   {
     display: flex;
     flex-direction: column;
+
+    position: fixed;
   }
 
   nav a {

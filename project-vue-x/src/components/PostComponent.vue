@@ -1,0 +1,136 @@
+<script setup>
+defineProps({
+  post: {
+    required: true
+  }
+})
+</script>
+
+<template>
+    <div class="post-card">
+        <div class="post-head">
+            <img :src="'/src/assets/img/image.png'" class="user-profile-pic" alt="Profile Picture">
+            <div class="user-info">GGremie</div>
+            <button class="btfollow">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="icon">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M18 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0ZM3 19.235v-.11a6.375 6.375 0 0 1 12.75 0v.109A12.318 12.318 0 0 1 9.374 21c-2.331 0-4.512-.645-6.374-1.766Z" />
+                </svg>
+            Follow
+          </button>
+        </div>
+        <div class="post-content">
+            {{post.texte}}  
+        </div>
+        <div class="post-end">
+            <div class="comment">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="icon">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 9.75a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0h-.375m-13.5 3.01c0 1.6 1.123 2.994 2.707 3.227 1.087.16 2.185.283 3.293.369V21l4.184-4.183a1.14 1.14 0 0 1 .778-.332 48.294 48.294 0 0 0 5.83-.498c1.585-.233 2.708-1.626 2.708-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z" />
+                </svg>
+            </div>
+            <div class="retweet">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="icon">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 0 0-3.7-3.7 48.678 48.678 0 0 0-7.324 0 4.006 4.006 0 0 0-3.7 3.7c-.017.22-.032.441-.046.662M19.5 12l3-3m-3 3-3-3m-12 3c0 1.232.046 2.453.138 3.662a4.006 4.006 0 0 0 3.7 3.7 48.656 48.656 0 0 0 7.324 0 4.006 4.006 0 0 0 3.7-3.7c.017-.22.032-.441.046-.662M4.5 12l3 3m-3-3-3 3" />
+                </svg>
+
+            </div>
+            <div class="like">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="icon">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
+                </svg>
+
+            </div>
+        </div>
+    </div>
+</template>
+
+<style scoped>
+
+.middle
+{
+    border-left: 2px solid #0000004d;
+    border-right: 2px solid #0000004d;
+}
+
+.post-end
+{
+    display: flex;
+    flex-direction: row;
+    height: 50px;
+
+    align-items: center;
+    justify-content: space-around;
+
+    color: black;
+}
+
+.post-content
+{
+    padding: 5px;
+
+    border-bottom: 2px solid #0000004d;
+
+    padding-bottom: 20px;
+}
+
+.post-card
+{
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+
+  margin: 16px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+.post-head
+{
+    height: 50px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.user-profile-pic
+{
+    height: 32px;
+    width: 32px;
+    border-radius: 50%;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.user-info
+{
+    font-weight: bold;
+}
+
+.btfollow
+{
+  display: flex;
+  flex-direction: row;
+  background-color: black;
+  color: white;
+  font-weight: bold;
+  border-radius: 12px;
+  padding: 5px;
+  align-items: center;
+  position:absolute;
+  right: 50px;
+  cursor: pointer;
+}
+
+.btfollow:hover
+{
+  background-color: white;
+  color: black;
+}
+
+.icon
+{
+  height: 20px;
+  width: 20px;
+  margin-right: 10px;
+}
+</style>
