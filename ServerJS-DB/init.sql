@@ -1,6 +1,15 @@
 CREATE DATABASE IF NOT EXISTS projetnewx;
 USE projetnewx;
 
+DROP TABLE IF EXISTS AIME;
+DROP TABLE IF EXISTS RETWEET;
+DROP TABLE IF EXISTS POST;
+DROP TABLE IF EXISTS POSSEDE;
+DROP TABLE IF EXISTS HASHTAG;
+DROP TABLE IF EXISTS PHOTO;
+DROP TABLE IF EXISTS EST_ABONNE;
+DROP TABLE IF EXISTS UTILISATEUR;
+
 /*==============================================================*/
 /* Nom de SGBD :  MySQL                                         */
 /* Date de création :  22/03/2024 16:32:06                      */
@@ -28,14 +37,6 @@ CREATE TABLE PHOTO (
 );
 
 
-/*==============================================================*/
-/* Table : HASHTAG                                              */
-/*==============================================================*/
-CREATE TABLE HASHTAG (
-   HASHTAGID            INT                 NOT NULL AUTO_INCREMENT,
-   NOMHASHTAG           VARCHAR(50)         NOT NULL,
-   PRIMARY KEY (HASHTAGID)
-);
 
 
 /*==============================================================*/
@@ -69,6 +70,16 @@ CREATE TABLE RETWEET (
    PRIMARY KEY (UTILISATEURID, POSTID)
 );
 
+
+/*==============================================================*/
+/* Table : HASHTAG                                              */
+/*==============================================================*/
+CREATE TABLE HASHTAG (
+   HASHTAGID            INT                 NOT NULL AUTO_INCREMENT,
+   NOMHASHTAG           VARCHAR(50)         NOT NULL,
+   PRIMARY KEY (HASHTAGID)
+);
+
 /*==============================================================*/
 /* Table : UTILISATEUR                                          */
 /*==============================================================*/
@@ -80,7 +91,7 @@ CREATE TABLE UTILISATEUR (
    MAIL                 VARCHAR(100),
    DATE                 DATE,
    UTILISATEURID        INT                 NOT NULL AUTO_INCREMENT,
-   URLPHOTOPROFIL       CHAR(10),
+   URLPHOTOPROFIL       VARCHAR(200),
    PRIMARY KEY (UTILISATEURID)
 );
 
@@ -170,7 +181,7 @@ INSERT INTO POST (POS_POSTID, UTILISATEURID, TEXTE, DATEPUBLICATION) VALUES (NUL
 INSERT INTO PHOTO (POSTID, URL) VALUES (1, 'https://example.com/photo1.jpg');
 INSERT INTO PHOTO (POSTID, URL) VALUES (2, 'https://example.com/photo2.jpg');
 
--- Inserting data into "AIME" table
+-- Inserting data into AIME table
 INSERT INTO AIME (UTILISATEURID, POSTID) VALUES (1, 1);
 INSERT INTO AIME (UTILISATEURID, POSTID) VALUES (2, 2); -- Inserting values for the second statement
 
