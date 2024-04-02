@@ -8,31 +8,40 @@ const filter = ref("")
 
 const filteredUsers = computed(() =>{
   return users.theUsers.filter(
-    usertemp => usertemp.name.toLowerCase().indexOf(filter.value) != -1)
-  
+    usertemp => usertemp.pseudo.toLowerCase().indexOf(filter.value) != -1)
 })
 </script>
 
 <template>
-  <div class="list">
-    <div class="search-container">
-        <input v-model="filter" class="search" placeholder="Rechercher un utilisateur...">
-    </div>
-    <div class="user-list">
-      <div v-for="user in filteredUsers" :key="user.name" class="user-card">
-        <img :src="'/src/assets/img/' + user.profilepicture" class="user-profile-pic" alt="Profile Picture">
-        <div class="user-info">
-          <div class="splite">
-            <span>
-              <h3 class="user-name">{{ user.name }}</h3>
-              <p class="user-bio">{{ user.bio }}</p>
-            </span>
-          
-          </div>
+  <section>
+    <header>
+      <div class="post-card">
+        <div class="post-head">
+          <img :src="'/src/assets/img/image.png'" class="user-profile-pic" alt="Profile Picture">
+          <div class="user-info">GGremie</div>
         </div>
+        <div class="post-content">
+          <textarea class="textareamessage" maxlength="280" placeholder="Mon message..." v-model="newPost"></textarea>
+        </div>
+        <button @click="post" class="btenvoi">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+            stroke="currentColor" class="icon">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M6 12 3.269 3.125A59.769 59.769 0 0 1 21.485 12 59.768 59.768 0 0 1 3.27 20.875L5.999 12Zm0 0h7.5" />
+          </svg>
+          Envoyer
+        </button>
       </div>
-    </div>
-  </div>
+      <div class="post-list">
+        <template v-for="parentPost in posts.thePosts.filter(post => !post.pos_postid)">
+          <PostComponent :post="parentPost"></PostComponent>
+          <div class="child-posts">
+            <PostComponent v-for="childPost in posts.thePosts.filter(post => post.pos_postid === parentPost.postid)" :post="childPost"></PostComponent>
+          </div>
+        </template>
+      </div>
+    </header>
+  </section>
 </template>
 
 
