@@ -8,8 +8,7 @@ const filter = ref("")
 
 const filteredUsers = computed(() =>{
   return users.theUsers.filter(
-    usertemp => usertemp.name.toLowerCase().indexOf(filter.value) != -1)
-  
+    usertemp => usertemp.pseudo.toLowerCase().indexOf(filter.value) != -1)
 })
 </script>
 
@@ -19,12 +18,12 @@ const filteredUsers = computed(() =>{
         <input v-model="filter" class="search" placeholder="Rechercher un utilisateur...">
     </div>
     <div class="user-list">
-      <div v-for="user in filteredUsers" :key="user.name" class="user-card">
-        <img :src="'/src/assets/img/' + user.profilepicture" class="user-profile-pic" alt="Profile Picture">
+      <div v-for="user in filteredUsers" :key="user.pseudo" class="user-card">
+        <img :src="'/src/assets/img/' + user.urlphotoprofil" class="user-profile-pic" alt="Profile Picture">
         <div class="user-info">
           <div class="splite">
             <span>
-              <h3 class="user-name">{{ user.name }}</h3>
+              <h3 class="user-name">{{ user.pseudo }}</h3>
               <p class="user-bio">{{ user.bio }}</p>
             </span>
           

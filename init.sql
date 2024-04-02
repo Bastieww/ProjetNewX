@@ -169,12 +169,13 @@ INSERT INTO HASHTAG (NOMHASHTAG) VALUES ('#PostgreSQL');
 INSERT INTO HASHTAG (NOMHASHTAG) VALUES ('#Database');
 
 -- Inserting data into UTILISATEUR table
-INSERT INTO UTILISATEUR (PSEUDO, MOTDEPASSE, BIO, CERTIFIE, MAIL, DATE, URLPHOTOPROFIL) VALUES ('user1', 'password1', 'Bio of user1', TRUE, 'user1@example.com', '2024-01-01', 'profile1.jpg');
-INSERT INTO UTILISATEUR (PSEUDO, MOTDEPASSE, BIO, CERTIFIE, MAIL, DATE, URLPHOTOPROFIL) VALUES ('user2', 'password2', 'Bio of user2', TRUE, 'user2@example.com', '2024-01-02', 'profile2.jpg');
+INSERT INTO UTILISATEUR (PSEUDO, MOTDEPASSE, BIO, CERTIFIE, MAIL, DATE, URLPHOTOPROFIL) VALUES ('Sky', 'password1', 'Je croque la vie à plein crocs UwU', TRUE, 'user1@example.com', '2024-01-01', 'profile1.jpg');
+INSERT INTO UTILISATEUR (PSEUDO, MOTDEPASSE, BIO, CERTIFIE, MAIL, DATE, URLPHOTOPROFIL) VALUES ('LeGej', 'password2', '2 frères, 2 fauves', TRUE, 'user2@example.com', '2024-01-02', 'profile2.jpg');
 
 -- Inserting data into POST table
 INSERT INTO POST (POS_POSTID, UTILISATEURID, TEXTE, DATEPUBLICATION) VALUES (NULL, 1, 'First post!', '2024-03-22');
 INSERT INTO POST (POS_POSTID, UTILISATEURID, TEXTE, DATEPUBLICATION) VALUES (NULL, 2, 'Second post!', '2024-03-23');
+INSERT INTO POST (POS_POSTID, UTILISATEURID, TEXTE, DATEPUBLICATION) VALUES (2, 2, 'Je me réponds tout seul parce que je n''ai pas d''amis !', '2024-03-23');
 
 -- Inserting data into PHOTO table
 INSERT INTO PHOTO (POSTID, URL) VALUES (1, 'https://example.com/photo1.jpg');

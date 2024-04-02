@@ -40,10 +40,18 @@ function post() {
         <Auth />
       </div>
       <div v-else>
-        <div class="post-list" v-for="thepost in posts.thePosts">
+  
+      <div class="post-list" v-for="thepost in posts.thePosts">
           <PostComponent :post="thepost"></PostComponent>
         </div>
+        <div class="childs">
+          <div class="post-list"
+            v-for="thepostchild in posts.thePostsChilds.filter(child => child.pos_postid == thepost.postid)">
+            <PostComponent :post="thepostchild"></PostComponent>
+          </div>
+        </div>
       </div>
+
     </header>
   </section>
 </template>
@@ -150,6 +158,6 @@ function post() {
   padding: 5px;
   max-height: 100px;
   font-size: large;
-  
+  min-height: 28px;
 }
 </style>
