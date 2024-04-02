@@ -21,8 +21,8 @@ services:
       - "65001:80"
     
   node:
-    image: node
+    image: skyhonnor/apiy
     container_name: NodeJSApi
     ports:
-      - "65502:8080"
+      - "9090:9090"
     
