@@ -4,17 +4,27 @@ import axios from 'axios'
 
 export const useUserStore = defineStore('users', () => {
     const theUsers = ref([])
+    const user = ref()
     const url = "http://localhost:9090/"
     axios.get(url + "utilisateurs").then(response => {
         theUsers.value = response.data
     })
+
+    function login(auth) {
+        axios.post(url+"login", auth).then( response => {
+            user.value = response.data
+        })
+    }
 
     async function getById(id) {
         let u = await axios.get(url + "utilisateur?id="+id)
         return u
     }
 
-  
+    function getEstAbonne(id) {
+        let abo = axios.get(url + "est_abonne?id="+id)
+        return abo
+    }
     // const theUsers = ref([
     //     {
     //         "name": "GGremie",
@@ -204,5 +214,5 @@ export const useUserStore = defineStore('users', () => {
     //     }
     //     ])
 
-  return { theUsers,getById }
+  return { theUsers, user, getById, getEstAbonne, login }
 })

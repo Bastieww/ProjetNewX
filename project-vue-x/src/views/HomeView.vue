@@ -1,11 +1,14 @@
 <script setup>
 import { usePostStore } from '@/stores/posts'
+import { useUserStore } from '@/stores/user'
 import { ref, computed } from 'vue'
 import PostComponent from '@/components/PostComponent.vue'
 import NewPostComponent from '@/components/NewPostComponent.vue'
+import Auth from "@/components/Auth.vue"
 
 const posts = usePostStore();
 const newPost = ref("")
+const user = useUserStore()
 
 function post() {
   posts.post(newPost.value)
@@ -18,7 +21,7 @@ function post() {
       <div class="post-card">
         <div class="post-head">
           <img :src="'/src/assets/img/image.png'" class="user-profile-pic" alt="Profile Picture">
-          <div class="user-info">GGremie</div>
+          <div class="user-info">Connecté en tant que {{ user.pseudo }}</div>
         </div>
         <div class="post-content">
           <textarea class="textareamessage" maxlength="280" placeholder="Mon message..." v-model="newPost"></textarea>
@@ -32,8 +35,14 @@ function post() {
           Envoyer
         </button>
       </div>
-      <div class="post-list" v-for="thepost in posts.thePosts">
-        <PostComponent :post="thepost"></PostComponent>
+      <div v-if="!user.user">
+        <h3>Vous devez être connecté pour voir les posts</h3>
+        <Auth />
+      </div>
+      <div v-else>
+        <div class="post-list" v-for="thepost in posts.thePosts">
+          <PostComponent :post="thepost"></PostComponent>
+        </div>
       </div>
     </header>
   </section>

@@ -19,11 +19,11 @@ const prisma = new PrismaClient()
 */
 
 app.post("/login", async (req, res) => {
-    if (req.body.pseudo && req.body.motdepasse) {
+    if (req.body.login && req.body.password) {
         try {
             const user = await prisma.utilisateur.findFirst({ where: {
-                pseudo: req.body.pseudo,
-                motdepasse: req.body.motdepasse
+                pseudo: req.body.login,
+                motdepasse: req.body.password
                 
             }
         })
@@ -41,7 +41,7 @@ app.post("/login", async (req, res) => {
         }
     }
     else {
-        res.status(400).json({ error: "Paramètre 'login' et/ou 'password' manquant dans la requête DELETE" });
+        res.status(400).json({ error: "Paramètre 'login' et/ou 'password' manquant" });
     }
 })
 
