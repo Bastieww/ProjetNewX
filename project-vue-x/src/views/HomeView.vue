@@ -21,9 +21,16 @@ function post() {
           <div class="user-info">GGremie</div>
         </div>
         <div class="post-content">
-          <textarea v-model="newPost"></textarea>
+          <textarea class="textareamessage" maxlength="280" placeholder="Mon message..." v-model="newPost"></textarea>
         </div>
-        <button @click="post" class="btenvoi">Envoyer</button>
+        <button @click="post" class="btenvoi">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+            stroke="currentColor" class="icon">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M6 12 3.269 3.125A59.769 59.769 0 0 1 21.485 12 59.768 59.768 0 0 1 3.27 20.875L5.999 12Zm0 0h7.5" />
+          </svg>
+          Envoyer
+        </button>
       </div>
       <div class="post-list" v-for="thepost in posts.thePosts">
         <PostComponent :post="thepost"></PostComponent>
@@ -124,5 +131,16 @@ function post() {
   height: 20px;
   width: 20px;
   margin-right: 10px;
+}
+
+.textareamessage {
+  border-radius: 8px;
+  border: 2px solid gray;
+  width: 98%;
+  resize: vertical;
+  padding: 5px;
+  max-height: 100px;
+  font-size: large;
+  
 }
 </style>
