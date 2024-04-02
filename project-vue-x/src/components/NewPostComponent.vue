@@ -1,4 +1,5 @@
 <script setup>
+
 </script>
 
 <template>
@@ -10,7 +11,7 @@
         <div class="post-content">
            <textarea></textarea>
         </div>
-        <button class="btenvoi">Envoyer</button>
+        <button @click="post" class="btenvoi">Envoyer</button>
     </div>
    
 </template>

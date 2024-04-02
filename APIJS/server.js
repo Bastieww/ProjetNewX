@@ -14,7 +14,6 @@ app.all('*', function (req, res, next) {
 });
 
 const prisma = new PrismaClient()
-
 /*
     Utilisateur
 */
