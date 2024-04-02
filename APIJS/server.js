@@ -14,9 +14,38 @@ app.all('*', function (req, res, next) {
 });
 
 const prisma = new PrismaClient()
+
 /*
     Utilisateur
 */
+
+app.post("/login", async (req, res) => {
+    if (req.body.pseudo && req.body.motdepasse) {
+        try {
+            const user = await prisma.utilisateur.findFirst({ where: {
+                pseudo: req.body.pseudo,
+                motdepasse: req.body.motdepasse
+                
+            }
+        })
+
+            if (user)
+            {
+                res.status(200).json(user);   
+            }
+            else
+            {
+                res.status(403).json();
+            }
+        } catch (error) {
+            res.status(500).json({ error: error });
+        }
+    }
+    else {
+        res.status(400).json({ error: "Paramètre 'login' et/ou 'password' manquant dans la requête DELETE" });
+    }
+})
+
 
 app.get("/utilisateurs", async (req, res) => {
     const users = await prisma.utilisateur.findMany()
@@ -259,14 +288,14 @@ app.get("/nbrlike", async (req, res) => {
 
     if (req.query.id) {
         try {
-            
+
             const nbr = await prisma.like.count({
                 where: {
                     postid: parseInt(req.query.id)
                 }
             })
 
-            res.json({ "nbrlike" : nbr })
+            res.json({ "nbrlike": nbr })
         } catch (error) {
             res.status(500).json({ error: error });
         }
@@ -280,7 +309,7 @@ app.get("/a_like", async (req, res) => {
 
     if (req.query.id) {
         try {
-            
+
             const a_like = await prisma.like.findMany({
                 where: {
                     utilisateurid: parseInt(req.query.id)
@@ -309,7 +338,7 @@ app.get("/qui_a_like", async (req, res) => {
 
     if (req.query.id) {
         try {
-            
+
             const a_like = await prisma.like.findMany({
                 where: {
                     postid: parseInt(req.query.id)
@@ -376,14 +405,14 @@ app.get("/nbrretweet", async (req, res) => {
 
     if (req.query.id) {
         try {
-            
+
             const nbr = await prisma.retweet.count({
                 where: {
                     postid: parseInt(req.query.id)
                 }
             })
 
-            res.json({ "nbrretweet" : nbr })
+            res.json({ "nbrretweet": nbr })
         } catch (error) {
             res.status(500).json({ error: error });
         }
@@ -398,7 +427,7 @@ app.get("/a_retweet", async (req, res) => {
 
     if (req.query.id) {
         try {
-            
+
             const a_retweet = await prisma.retweet.findMany({
                 where: {
                     utilisateurid: parseInt(req.query.id)
@@ -427,7 +456,7 @@ app.get("/qui_a_retweet", async (req, res) => {
 
     if (req.query.id) {
         try {
-            
+
             const a_retweet = await prisma.retweet.findMany({
                 where: {
                     postid: parseInt(req.query.id)
