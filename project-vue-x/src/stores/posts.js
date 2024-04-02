@@ -20,6 +20,20 @@ export const usePostStore = defineStore('posts', () => {
         })
     }
 
+    function answer(texte,idansweredpost) {
+
+        let newPost = {
+            texte: texte,
+            pos_postid: idansweredpost,
+            //temp
+            utilisateurid: 1
+            //utilisateurId: utilisateurId,
+        }
+        axios.post(url + "posts/add", newPost).then(response => {
+            thePosts.value.splice(0, 0, newPost)
+        })
+    }
+
         axios.get(url + "posts").then(response => {
             var temp = Array.from(response.data).filter(p => p.pos_postid == null)//Enleve les posts "enfants"
             temp.sort((a,b)=>a.postid<b.postid?1:-1)
@@ -32,5 +46,5 @@ export const usePostStore = defineStore('posts', () => {
             thePostsChilds.value = temp
         })
 
-    return { thePosts, thePostsChilds, post }
+    return { thePosts, thePostsChilds, post, answer }
 })

@@ -1,5 +1,6 @@
 <script setup>
 import { useUserStore } from '@/stores/user'
+import { usePostStore } from '@/stores/posts'
 import { ref, onMounted } from 'vue'
 const props = defineProps({
     post: {
@@ -7,11 +8,23 @@ const props = defineProps({
     }
 })
 const users = useUserStore()
+const posts = usePostStore()
 var theUser = ref(null)
+const newAnsweringPost = ref("")
 var usersAbo = ref([])
 users.getById(props.post.utilisateurid).then(response => theUser.value = response.data)
 users.getEstAbonne(users.user.utilisateurid).then(response => usersAbo.value = response.data)
 console.log(usersAbo)
+
+let answering = ref(false)
+
+function answeringSwap() {
+    answering.value = !answering.value
+}
+
+function answer() {
+    posts.answer(newAnsweringPost.value, props.post.postid)
+}
 
 </script>
 
@@ -44,8 +57,24 @@ console.log(usersAbo)
         <div class="post-content">
             {{ post.texte }}
         </div>
-        <div class="post-end">
-            <div class="comment">
+        <div v-if="answering == true" class="post-content">
+            <div class="post-card">
+                <div class="post-content">
+                    <textarea class="textareamessage" maxlength="280" placeholder="Mon message..."
+                        v-model="newAnsweringPost"></textarea>
+                </div>
+                <button @click="answer" class="btenvoi">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="icon">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M6 12 3.269 3.125A59.769 59.769 0 0 1 21.485 12 59.768 59.768 0 0 1 3.27 20.875L5.999 12Zm0 0h7.5" />
+                    </svg>
+                    Envoyer
+                </button>
+            </div>
+        </div>
+        <div class="post-end" v-if="props.post.pos_postid == null">
+            <div class="comment" @click="answeringSwap">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="icon">
                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -66,7 +95,6 @@ console.log(usersAbo)
                     <path stroke-linecap="round" stroke-linejoin="round"
                         d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
                 </svg>
-
             </div>
         </div>
     </div>

@@ -39,12 +39,12 @@ function post() {
         <h3>Vous devez être connecté pour voir les posts</h3>
         <Auth />
       </div>
-      
+
       <div v-else>
         <div class="post-list" v-for="thepost in posts.thePosts">
           <PostComponent :post="thepost"></PostComponent>
           <div class="childs">
-            <div class="post-list"
+            <div class="post-card"
               v-for="thepostchild in posts.thePostsChilds.filter(child => child.pos_postid == thepost.postid)">
               <PostComponent :post="thepostchild"></PostComponent>
             </div>
