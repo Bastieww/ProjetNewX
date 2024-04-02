@@ -70,6 +70,28 @@ app.get("/utilisateur", async (req, res) => {
     }
 })
 
+app.put("/utilisateur/edit", async (req, res) => {
+    if (req.query.id) {
+        try {
+
+            const users = await prisma.utilisateur.update({
+                where: {
+                    utilisateurid: parseInt(req.query.id)
+                },
+                data:
+                    req.body
+            })
+
+        } catch (error) {
+            res.status(500).json({ error: error });
+        }
+    }
+    else {
+        res.status(400).json({ error: "Paramètre 'id' manquant dans la requête GET" });
+    }
+
+})
+
 /*
  * 
  */
@@ -194,8 +216,8 @@ app.get("/post", async (req, res) => {
     if (req.query.id) {
         try {
             const post = await prisma.post.findFirst({
-                where:{
-                    postid : parseInt(req.query.id)
+                where: {
+                    postid: parseInt(req.query.id)
                 }
             })
             res.status(200).json(post);
@@ -213,8 +235,8 @@ app.delete("/posts/del", async (req, res) => {
     if (req.query.id) {
         try {
             const post = await prisma.post.delete({
-                where:{
-                    postid : parseInt(req.query.id)
+                where: {
+                    postid: parseInt(req.query.id)
                 }
             })
             res.status(204).json();
@@ -232,8 +254,104 @@ app.delete("/posts/del", async (req, res) => {
  */
 
 /*
-
+    Like
 */
+
+app.get("/a_like", async (req, res) => {
+
+    if (req.query.id) {
+        try {
+            
+            const a_like = await prisma.like.findMany({
+                where: {
+                    utilisateurid: parseInt(req.query.id)
+                }
+            })
+
+            console.log(a_like)
+
+            const ids = a_like.map(element => element.postid);
+
+            console.log(ids)
+
+            const posts = await prisma.utilisateur.findMany({
+                where: {
+                    postid: { in: ids }
+                }
+            })
+
+            res.json(posts)
+        } catch (error) {
+            res.status(500).json({ error: error });
+        }
+    }
+    else {
+        res.status(400).json({ error: "Paramètre 'id' manquant dans la requête GET" });
+    }
+})
+
+app.get("/qui_a_like", async (req, res) => {
+    if (req.query.id) {
+        try {
+            const a_like = await prisma.like.findMany({
+                where: {
+                    utilisateurid: parseInt(req.query.id)
+                }
+            })
+
+            const ids = a_like.map(element => element.postid);
+
+            const posts = await prisma.utilisateur.findMany({
+                where: {
+                    postid: { in: ids }
+                }
+            })
+
+            res.json(posts)
+        } catch (error) {
+            res.status(500).json({ error: error });
+        }
+    }
+    else {
+        res.status(400).json({ error: "Paramètre 'id' manquant dans la requête GET" });
+    }
+})
+
+app.post("/abonne", async (req, res) => {
+    try {
+        const abonne = await prisma.est_abonne.create({ data: req.body })
+        res.status(201).json();
+    } catch (error) {
+        res.status(500).json({ error: error });
+    }
+})
+
+app.delete("/abonne/del", async (req, res) => {
+    if (req.query.id && req.query.idabonne) {
+        try {
+            const abonne = await prisma.est_abonne.delete({
+                where: {
+                    utilisateurid_uti_utilisateurid: {
+                        utilisateurid: parseInt(req.query.id),
+                        uti_utilisateurid: parseInt(req.query.idabonne)
+                    }
+                }
+            })
+            console.log(abonne)
+            res.status(204).json();
+        } catch (error) {
+            res.status(500).json({ error: error });
+        }
+    }
+    else {
+        res.status(400).json({ error: "Paramètre 'id' et/ou 'idabonne' manquant dans la requête DELETE" });
+    }
+})
+
+/**
+ * 
+ */
+
 
 app.listen(9090, () => {
     console.log("Listen on : 9090")
