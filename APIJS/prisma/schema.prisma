@@ -1,0 +1,88 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model est_abonne {
+  utilisateurid                                         Int
+  uti_utilisateurid                                     Int
+  utilisateur_est_abonne_uti_utilisateuridToutilisateur utilisateur @relation("est_abonne_uti_utilisateuridToutilisateur", fields: [uti_utilisateurid], references: [utilisateurid], onUpdate: Restrict, map: "fk_est_abon_est_abonn_utilisa")
+  utilisateur_est_abonne_utilisateuridToutilisateur     utilisateur @relation("est_abonne_utilisateuridToutilisateur", fields: [utilisateurid], references: [utilisateurid], onUpdate: Restrict, map: "fk_est_abon_est_abonn_utilisat")
+
+  @@id([utilisateurid, uti_utilisateurid], map: "pk_est_abonne")
+}
+
+model hashtag {
+  hashtagid  Int       @id(map: "pk_hashtag") @default(autoincrement())
+  nomhashtag String    @db.VarChar(50)
+  possede    possede[]
+}
+
+model like {
+  utilisateurid Int
+  postid        Int
+  post          post        @relation(fields: [postid], references: [postid], onUpdate: Restrict, map: "fk_like_like2_post")
+  utilisateur   utilisateur @relation(fields: [utilisateurid], references: [utilisateurid], onUpdate: Restrict, map: "fk_like_like_utilisat")
+
+  @@id([utilisateurid, postid], map: "pk_like")
+}
+
+model photo {
+  photoid Int    @id(map: "pk_photo") @default(autoincrement())
+  postid  Int
+  url     String @db.VarChar(200)
+  post    post   @relation(fields: [postid], references: [postid], onUpdate: Restrict, map: "fk_photo_contient_post")
+}
+
+model possede {
+  postid    Int
+  hashtagid Int
+  hashtag   hashtag @relation(fields: [hashtagid], references: [hashtagid], onUpdate: Restrict, map: "fk_possede_possede2_hashtag")
+  post      post    @relation(fields: [postid], references: [postid], onUpdate: Restrict, map: "fk_possede_possede_post")
+
+  @@id([postid, hashtagid], map: "pk_possede")
+}
+
+model post {
+  postid          Int         @id(map: "pk_post") @default(autoincrement())
+  pos_postid      Int?
+  utilisateurid   Int
+  texte           String?     @db.VarChar(280)
+  datepublication DateTime?   @db.Date
+  like            like[]
+  photo           photo[]
+  possede         possede[]
+  utilisateur     utilisateur @relation(fields: [utilisateurid], references: [utilisateurid], onUpdate: Restrict, map: "fk_post_appartien_utilisat")
+  post            post?       @relation("postTopost", fields: [pos_postid], references: [postid], onDelete: Restrict, onUpdate: Restrict, map: "fk_post_repond_post")
+  other_post      post[]      @relation("postTopost")
+  retweet         retweet[]
+}
+
+model retweet {
+  utilisateurid Int
+  postid        Int
+  post          post        @relation(fields: [postid], references: [postid], onUpdate: Restrict, map: "fk_retweet_retweet2_post")
+  utilisateur   utilisateur @relation(fields: [utilisateurid], references: [utilisateurid], onUpdate: Restrict, map: "fk_retweet_retweet_utilisat")
+
+  @@id([utilisateurid, postid], map: "pk_retweet")
+}
+
+model utilisateur {
+  pseudo                                               String       @db.VarChar(50)
+  motdepasse                                           String       @db.VarChar(50)
+  bio                                                  String?      @db.VarChar(256)
+  certifie                                             Boolean?
+  mail                                                 String?      @db.VarChar(100)
+  date                                                 DateTime?    @db.Date
+  utilisateurid                                        Int          @id(map: "pk_utilisateur") @default(autoincrement())
+  urlphotoprofil                                       String?      @db.VarChar(200)
+  est_abonne_est_abonne_uti_utilisateuridToutilisateur est_abonne[] @relation("est_abonne_uti_utilisateuridToutilisateur")
+  est_abonne_est_abonne_utilisateuridToutilisateur     est_abonne[] @relation("est_abonne_utilisateuridToutilisateur")
+  like                                                 like[]
+  post                                                 post[]
+  retweet                                              retweet[]
+}

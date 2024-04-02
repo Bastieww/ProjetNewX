@@ -1,0 +1,26 @@
+services:
+
+  postgres:
+    image: postgres
+    container_name: PostgresDBApi
+    ports:
+      - "65500:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres  
+
+  pgadmin:
+    image: elestio/pgadmin
+    container_name: PgAdmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@postgres.com
+      PGADMIN_DEFAULT_PASSWORD: postgres
+    ports:
+      - "65001:80"
+    
+  node:
+    image: node
+    container_name: NodeJSApi
+    ports:
+      - "65502:8080"
+    
