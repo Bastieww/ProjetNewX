@@ -11,6 +11,7 @@ export const useUserStore = defineStore('users', () => {
     })
 
     function login(auth) {
+        console.log(auth+url)
         axios.post(url+"login", auth).then( response => {
             user.value = response.data
         })

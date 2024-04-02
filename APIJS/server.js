@@ -19,11 +19,11 @@ const prisma = new PrismaClient()
 */
 
 app.post("/login", async (req, res) => {
-    if (req.body.login && req.body.password) {
+    if (req.body.pseudo && req.body.motdepasse) {
         try {
             const user = await prisma.utilisateur.findFirst({ where: {
-                pseudo: req.body.login,
-                motdepasse: req.body.password
+                pseudo: req.body.pseudo,
+                motdepasse: req.body.motdepasse
                 
             }
         })

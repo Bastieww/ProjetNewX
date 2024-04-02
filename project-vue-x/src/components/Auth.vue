@@ -4,13 +4,13 @@ import { ref, computed } from 'vue'
 
 const user = useUserStore()
 
-const authlogin = ref("")
+const authpseudo = ref("")
 const authpasswd = ref("")
 
 function login() {
   user.login({ 
-    login: authlogin.value, 
-    password: authpasswd.value
+    pseudo: authpseudo.value, 
+    motdepasse: authpasswd.value
   })
 }
 
@@ -26,8 +26,8 @@ function logout() {
 <template>
   <div id="auth"> 
 
-    <div id="login" v-if="!user.userLogged">
-      <input v-model="authlogin">
+    <div id="pseudo" v-if="!user.userLogged">
+      <input v-model="authpseudo">
       <input v-model="authpasswd">
 
       <button @click="login">Se Connecter</button>
