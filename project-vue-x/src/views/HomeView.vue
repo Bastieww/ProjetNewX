@@ -32,8 +32,15 @@ function post() {
           Envoyer
         </button>
       </div>
+
       <div class="post-list" v-for="thepost in posts.thePosts">
         <PostComponent :post="thepost"></PostComponent>
+        <div class="childs">
+          <div class="post-list"
+            v-for="thepostchild in posts.thePostsChilds.filter(child => child.pos_postid == thepost.postid)">
+            <PostComponent :post="thepostchild"></PostComponent>
+          </div>
+        </div>
       </div>
     </header>
   </section>

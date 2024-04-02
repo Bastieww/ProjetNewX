@@ -9,9 +9,6 @@ const props = defineProps({
 const users = useUserStore()
 var theUser = ref(null)
 users.getById(props.post.utilisateurid).then(response => theUser.value = response.data)
-
-
-
 </script>
 
 <template>
@@ -58,7 +55,6 @@ users.getById(props.post.utilisateurid).then(response => theUser.value = respons
         </div>
     </div>
 </template>
-
 <style scoped>
 .middle {
     border-left: 2px solid #0000004d;
