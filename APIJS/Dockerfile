@@ -6,4 +6,8 @@ WORKDIR /app
 
 COPY . .
 
+RUN npm install
+
+RUN npx prisma generate
+
 CMD [ "node" , "./server.js" ]
