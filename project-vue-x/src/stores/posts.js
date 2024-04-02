@@ -1,17 +1,18 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
+import axios from 'axios'
 
 export const usePostStore = defineStore('posts', () => {
 
     const posts = ref([])
     const url = "http://localhost:9090/"
-    function post(texte, userId) {
+    function post(texte) {
+        console.log('test')
         let newPost = {
           texte: texte,
           //temp
-          utilisateurId: 1,
+          utilisateurid: 1
           //utilisateurId: utilisateurId,
-          timestamp: Date.now()
         }
         axios.post(url+"posts/add", newPost).then( response => {
             posts.value.splice(0,0,newPost)
@@ -160,5 +161,5 @@ export const usePostStore = defineStore('posts', () => {
         }
     ])
 
-  return { thePosts }
+  return { thePosts, post }
 })
