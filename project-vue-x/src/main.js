@@ -11,4 +11,12 @@ const app = createApp(App)
 app.use(createPinia())
 app.use(router)
 
+import ScriptX from 'vue-scriptx'
+app.use(ScriptX)
+
+import Ads from 'vue-google-adsense'
+app.use(Ads.Adsense)
+app.use(Ads.InArticleAdsense)
+app.use(Ads.InFeedAdsense)
+
 app.mount('#app')

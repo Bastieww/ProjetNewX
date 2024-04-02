@@ -14,17 +14,21 @@ const filteredUsers = computed(() =>{
 </script>
 
 <template>
-  <div class="user-container">
-    <h1>Qui allez-vous rencontrer aujourd'hui ?</h1>
+  <div class="list">
     <div class="search-container">
-      <input v-model="filter" style="width: 50% ; height: 20px;"  placeholder="Taper pour rechercher...">
+        <input v-model="filter" class="search" placeholder="Rechercher un utilisateur...">
     </div>
     <div class="user-list">
       <div v-for="user in filteredUsers" :key="user.name" class="user-card">
         <img :src="'/src/assets/img/' + user.profilepicture" class="user-profile-pic" alt="Profile Picture">
         <div class="user-info">
-          <p class="user-name">{{ user.name }}</p>
-          <p class="user-bio">{{ user.bio }}</p>
+          <div class="splite">
+            <span>
+              <h3 class="user-name">{{ user.name }}</h3>
+              <p class="user-bio">{{ user.bio }}</p>
+            </span>
+          
+          </div>
         </div>
       </div>
     </div>
@@ -34,45 +38,92 @@ const filteredUsers = computed(() =>{
 
 <style scoped>
 
-.user-container {
-  text-align: center;
-}
-
-.search-container {
-  margin-bottom: 20px;
-}
-
-.user-list {
-  margin: 0 auto;
-  max-width: 400px; /* Adjust as needed */
-  text-align: left;
-}
-
-.user-card {
-  background-color: #ffffff;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
-  padding: 15px;
+.splite
+{
   display: flex;
+  flex-direction: row;
+}
+
+.btfollow
+{
+  display: flex;
+  flex-direction: row;
+  background-color: black;
+  color: white;
+  font-weight: bold;
+  border-radius: 12px;
+  padding: 5px;
   align-items: center;
+  position:absolute;
+  right: 50px;
+  cursor: pointer;
 }
 
-.user-profile-pic {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  margin-right: 15px;
-}
-
-.user-info {
-  flex-grow: 1;
+.btfollow:hover
+{
+  background-color: white;
   color: black;
 }
 
-.user-name {
-  font-weight: bold;
+.icon
+{
+  height: 20px;
+  width: 20px;
+  margin-right: 10px;
 }
 
-/* Add additional styling for other user information if needed */
+.search-container
+{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.search
+{
+  width: 75%; 
+  height: 20px; 
+
+  border-radius: 20px;
+  padding: 10px;
+  margin: 30px;
+
+  border-color: gray ;
+}
+
+.search:focus
+{
+  transform: scale(0.5) 
+  
+}
+
+img
+{
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+}
+
+
+.user-card
+{
+  border-radius: 12px;
+  display: flex;
+  flex-direction: row;
+  padding: 15px;
+
+  margin: 16px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+  
+}
+
+.user-info
+{
+  margin-left: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+
 </style>
