@@ -19,11 +19,6 @@
         <MenuComponent menuTEXT="Home" to="/"></MenuComponent>
         <MenuComponent menuTEXT="Explore" to="/search"></MenuComponent>
         <MenuComponent menuTEXT="Profile" to="/profile"></MenuComponent>
-
-        <Adsense
-            data-ad-client="ca-pub-8173881338029933"
-            data-ad-slot="1976023465">
-        </Adsense>
       </nav>
       <div class="col2">
         <RouterView />
