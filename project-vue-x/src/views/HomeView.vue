@@ -141,6 +141,6 @@ function post() {
   padding: 5px;
   max-height: 100px;
   font-size: large;
-  
+  min-height: 28px;
 }
 </style>
