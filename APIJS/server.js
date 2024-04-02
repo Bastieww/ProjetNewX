@@ -175,7 +175,6 @@ app.delete("/abonne/del", async (req, res) => {
                     }
                 }
             })
-            console.log(abonne)
             res.status(204).json();
         } catch (error) {
             res.status(500).json({ error: error });
@@ -257,6 +256,27 @@ app.delete("/posts/del", async (req, res) => {
     Like
 */
 
+app.get("/nbrlike", async (req, res) => {
+
+    if (req.query.id) {
+        try {
+            
+            const nbr = await prisma.like.count({
+                where: {
+                    postid: parseInt(req.query.id)
+                }
+            })
+
+            res.json({ "nbrlike" : nbr })
+        } catch (error) {
+            res.status(500).json({ error: error });
+        }
+    }
+    else {
+        res.status(400).json({ error: "Paramètre 'id' manquant dans la requête GET" });
+    }
+})
+
 app.get("/a_like", async (req, res) => {
 
     if (req.query.id) {
@@ -268,13 +288,9 @@ app.get("/a_like", async (req, res) => {
                 }
             })
 
-            console.log(a_like)
-
             const ids = a_like.map(element => element.postid);
 
-            console.log(ids)
-
-            const posts = await prisma.utilisateur.findMany({
+            const posts = await prisma.post.findMany({
                 where: {
                     postid: { in: ids }
                 }
@@ -291,17 +307,108 @@ app.get("/a_like", async (req, res) => {
 })
 
 app.get("/qui_a_like", async (req, res) => {
+
     if (req.query.id) {
         try {
+            
             const a_like = await prisma.like.findMany({
+                where: {
+                    postid: parseInt(req.query.id)
+                }
+            })
+
+            const ids = a_like.map(element => element.utilisateurid);
+
+            const posts = await prisma.utilisateur.findMany({
+                where: {
+                    utilisateurid: { in: ids }
+                }
+            })
+
+            res.json(posts)
+        } catch (error) {
+            res.status(500).json({ error: error });
+        }
+    }
+    else {
+        res.status(400).json({ error: "Paramètre 'id' manquant dans la requête GET" });
+    }
+})
+
+app.post("/like", async (req, res) => {
+    try {
+        const like = await prisma.like.create({ data: req.body })
+        res.status(201).json();
+    } catch (error) {
+        res.status(500).json({ error: error });
+    }
+})
+
+app.delete("/like/del", async (req, res) => {
+    if (req.query.id && req.query.postid) {
+        try {
+            const like = await prisma.like.delete({
+                where: {
+                    utilisateurid_postid: {
+                        utilisateurid: parseInt(req.query.id),
+                        postid: parseInt(req.query.postid)
+                    }
+                }
+            })
+            res.status(204).json();
+        } catch (error) {
+            res.status(500).json({ error: error });
+        }
+    }
+    else {
+        res.status(400).json({ error: "Paramètre 'id' et/ou 'postid' manquant dans la requête DELETE" });
+    }
+})
+
+/**
+ * 
+ */
+
+/**
+ * Retweet
+ */
+
+app.get("/nbrretweet", async (req, res) => {
+
+    if (req.query.id) {
+        try {
+            
+            const nbr = await prisma.retweet.count({
+                where: {
+                    postid: parseInt(req.query.id)
+                }
+            })
+
+            res.json({ "nbrretweet" : nbr })
+        } catch (error) {
+            res.status(500).json({ error: error });
+        }
+    }
+    else {
+        res.status(400).json({ error: "Paramètre 'id' manquant dans la requête GET" });
+    }
+})
+
+
+app.get("/a_retweet", async (req, res) => {
+
+    if (req.query.id) {
+        try {
+            
+            const a_retweet = await prisma.retweet.findMany({
                 where: {
                     utilisateurid: parseInt(req.query.id)
                 }
             })
 
-            const ids = a_like.map(element => element.postid);
+            const ids = a_retweet.map(element => element.postid);
 
-            const posts = await prisma.utilisateur.findMany({
+            const posts = await prisma.post.findMany({
                 where: {
                     postid: { in: ids }
                 }
@@ -317,41 +424,68 @@ app.get("/qui_a_like", async (req, res) => {
     }
 })
 
-app.post("/abonne", async (req, res) => {
+app.get("/qui_a_retweet", async (req, res) => {
+
+    if (req.query.id) {
+        try {
+            
+            const a_retweet = await prisma.retweet.findMany({
+                where: {
+                    postid: parseInt(req.query.id)
+                }
+            })
+
+            const ids = a_retweet.map(element => element.utilisateurid);
+
+            const posts = await prisma.utilisateur.findMany({
+                where: {
+                    utilisateurid: { in: ids }
+                }
+            })
+
+            res.json(posts)
+        } catch (error) {
+            res.status(500).json({ error: error });
+        }
+    }
+    else {
+        res.status(400).json({ error: "Paramètre 'id' manquant dans la requête GET" });
+    }
+})
+
+app.post("/retweet", async (req, res) => {
     try {
-        const abonne = await prisma.est_abonne.create({ data: req.body })
+        const like = await prisma.retweet.create({ data: req.body })
         res.status(201).json();
     } catch (error) {
         res.status(500).json({ error: error });
     }
 })
 
-app.delete("/abonne/del", async (req, res) => {
-    if (req.query.id && req.query.idabonne) {
+app.delete("/like/del", async (req, res) => {
+    if (req.query.id && req.query.postid) {
         try {
-            const abonne = await prisma.est_abonne.delete({
+            const like = await prisma.retweet.delete({
                 where: {
-                    utilisateurid_uti_utilisateurid: {
+                    utilisateurid_postid: {
                         utilisateurid: parseInt(req.query.id),
-                        uti_utilisateurid: parseInt(req.query.idabonne)
+                        postid: parseInt(req.query.postid)
                     }
                 }
             })
-            console.log(abonne)
             res.status(204).json();
         } catch (error) {
             res.status(500).json({ error: error });
         }
     }
     else {
-        res.status(400).json({ error: "Paramètre 'id' et/ou 'idabonne' manquant dans la requête DELETE" });
+        res.status(400).json({ error: "Paramètre 'id' et/ou 'postid' manquant dans la requête DELETE" });
     }
 })
 
 /**
  * 
  */
-
 
 app.listen(9090, () => {
     console.log("Listen on : 9090")
