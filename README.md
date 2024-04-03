@@ -59,17 +59,21 @@ Le projet utilise automatiquement (grâce au [docker compose](https://docs.docke
 
 - PostgreSQL : 
 
-> `user : postgres`
+> Pour se connecter à la base de données
 > 
-> `password : postgres` 
+> Utilisateur : `postgres`
+> 
+> Mot de passe : `postgres` 
 
 - PgAdmin : 
 
 > Cliquez pour ouvrir votre navigateur : [`http://localhost:65502`](http://localhost:65501)
 
-> `user : postgres@postgres.com`
+> Pour se connecter à PgAdmin.
 > 
-> `password : postgres` 
+> Email : `postgres@postgres.com`
+> 
+> Mot de passe : `postgres` 
 
 
 ## Pour accéder au site ( Vue.js )
