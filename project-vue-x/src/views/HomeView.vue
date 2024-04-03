@@ -68,7 +68,7 @@ function followFalse() {
           {{ followFalse() }}
 
           <div class="childs">
-            <div class="post-card"
+            <div class="uwu"
             v-for="thepostchild in posts.thePostsChilds.filter(child => child.pos_postid == thepost.postid)">
               <div v-for="abonne in usersAbo">
                 <div v-if="abonne.utilisateurid == thepost.utilisateurid">
@@ -86,6 +86,10 @@ function followFalse() {
 </template>
 
 <style>
+.uwu {
+  margin-left: 50px;
+  margin-bottom: 40px;
+}
 .btenvoi {
   display: flex;
   flex-direction: row;

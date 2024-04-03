@@ -280,14 +280,6 @@ app.delete("/posts/del", async (req, res) => {
     }
 })
 
-/**
- * 
- */
-
-/*
-    Like
-*/
-
 app.get("/nbrlike", async (req, res) => {
 
     if (req.query.id) {
