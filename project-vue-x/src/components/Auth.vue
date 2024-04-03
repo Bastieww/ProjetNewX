@@ -71,7 +71,7 @@ function register() {
       </button>
       <div>
       <button @click="creatingNewAccountSwap">Pas de compte ? Créez-en un !</button>
-      <div v-if="creatingNewAccount">
+      <div v-if="creatingNewAccount" class="createaccount">
         <input v-model="newpseudo" placeholder="Pseudo..." required>
         <input v-model="newpasswd" placeholder="Mot de passe..." required>
         <input v-model="newmail" placeholder="Mail..." type="email">
@@ -93,6 +93,14 @@ function register() {
 
 
 <style scoped>
+.createaccount
+{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 input,
 button {
   margin: 15px;
@@ -117,6 +125,7 @@ button {
   background-color: white;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 #pseudo {
