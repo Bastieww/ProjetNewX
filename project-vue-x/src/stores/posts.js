@@ -1,5 +1,6 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
+import { useUserStore } from '@/stores/user'
 import axios from 'axios'
 
 export const usePostStore = defineStore('posts', () => {
@@ -7,17 +8,21 @@ export const usePostStore = defineStore('posts', () => {
     const thePosts = ref([])
     const thePostsChilds = ref([])
     const url = "http://localhost:9090/"
+
+    const users = useUserStore()
+
     function post(texte) {
 
         let newPost = {
             texte: texte,
             //temp
-            utilisateurid: 1
+            utilisateurid: users.user.utilisateurid
             //utilisateurId: utilisateurId,
         }
         axios.post(url + "posts/add", newPost).then(response => {
             thePosts.value.splice(0, 0, newPost)
         })
+        location.reload()
     }
 
     function answer(texte, idansweredpost) {
@@ -26,12 +31,13 @@ export const usePostStore = defineStore('posts', () => {
             texte: texte,
             pos_postid: idansweredpost,
             //temp
-            utilisateurid: 1
+            utilisateurid: users.user.utilisateurid
             //utilisateurId: utilisateurId,
         }
         axios.post(url + "posts/add", newPost).then(response => {
             thePosts.value.splice(0, 0, newPost)
         })
+        location.reload()
     }
 
     async function getLikes(postid) {

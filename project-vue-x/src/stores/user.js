@@ -13,27 +13,45 @@ export const useUserStore = defineStore('users', () => {
     })
 
     function addFollow(idsusers) {
-        axios.post(url+"abonne", idsusers).then( response => {
+        axios.post(url + "abonne", idsusers).then(response => {
             console.log(response)
         })
     }
 
     function removeFollow(idsusers) {
         console.log(idsusers)
-        console.log(url+"abonne/del")
-        
-        axios.delete(url+"abonne/del", idsusers).then( response => {
+        console.log(url + "abonne/del")
+
+        axios.delete(url + "abonne/del", idsusers).then(response => {
             console.log(response)
         })
     }
 
     function login(auth) {
-        console.log(auth + url)
-        axios.post(url + "login", auth).then(response => {
-            user.value = response.data
-            // Save user to session storage
-            sessionStorage.setItem('user', JSON.stringify(response.data))
-        })
+        axios.post(url + "login", auth)
+            .then(response => {
+                console.log("Response status:", response.status);
+                console.log("Response data:", response.data);
+
+                user.value = response.data;
+                // Save user to session storage
+                sessionStorage.setItem('user', JSON.stringify(response.data));
+                location.reload();
+            })
+            .catch(error => {
+                console.error("Error logging in:", error);
+                alert("Identifiants incorrects");
+            });
+    }
+
+
+    function register(auth) {
+        axios.post(url + "utilisateurs/add", auth)
+            .then(response => {
+                if (response.status === 201) {
+                    login(auth);
+                }
+            })
     }
 
     async function getById(id) {
@@ -51,5 +69,5 @@ export const useUserStore = defineStore('users', () => {
         return abo
     }
 
-    return { theUsers, user, addFollow, removeFollow, getById, getEstAbonne,getQuiEstAbonne , login }
+    return { theUsers, user, addFollow, removeFollow, getById, getEstAbonne, getQuiEstAbonne, login, register }
 })

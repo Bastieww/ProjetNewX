@@ -1,7 +1,7 @@
 <script setup>
 import {useUserStore} from '@/stores/user'
 import User from '@/components/User.vue'
-import { ref,computed } from 'vue';
+import { ref,computed, watchEffect  } from 'vue';
 const users = useUserStore()
 
 const filter = ref("")
@@ -9,6 +9,11 @@ const filter = ref("")
 const filteredUsers = computed(() =>{
   return users.theUsers.filter(
     usertemp => usertemp.pseudo.toLowerCase().indexOf(filter.value) != -1)
+})
+
+
+watchEffect(() => {
+  filteredUsers.value // Trigger reactivity
 })
 </script>
 
