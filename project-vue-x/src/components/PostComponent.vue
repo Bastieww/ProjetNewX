@@ -2,6 +2,7 @@
 import { useUserStore } from '@/stores/user'
 import { usePostStore } from '@/stores/posts'
 import { ref, onMounted } from 'vue'
+import { createPinia } from 'pinia';
 const props = defineProps({
     post: {
         required: true
@@ -9,12 +10,16 @@ const props = defineProps({
 })
 const users = useUserStore()
 const posts = usePostStore()
-var theUser = ref(null)
 const newAnsweringPost = ref("")
+var theUser = ref(null)
 var usersAbo = ref([])
+const utilisateurid = ref()
+const uti_utilisateurid = ref()
+
 users.getById(props.post.utilisateurid).then(response => theUser.value = response.data)
 users.getEstAbonne(users.user.utilisateurid).then(response => usersAbo.value = response.data)
 console.log(usersAbo)
+
 
 let answering = ref(false)
 
@@ -25,6 +30,12 @@ function answeringSwap() {
 function answer() {
     posts.answer(newAnsweringPost.value, props.post.postid)
 }
+function addFollow() {
+    user.addFollow({
+        utilisateurid: theUser.utilisateurid,
+        uti_utilisateurid: idabonne
+    })
+}
 
 </script>
 
@@ -33,26 +44,24 @@ function answer() {
         <div class="post-head">
             <img :src="'/src/assets/img/image.png'" class="user-profile-pic" alt="Profile Picture">
             <div class="user-info">{{ theUser.pseudo }}</div>
-            <div v-if="!usersAbo.includes(users.user)">
-                <button class="btfollow">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor" class="icon">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M18 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0ZM3 19.235v-.11a6.375 6.375 0 0 1 12.75 0v.109A12.318 12.318 0 0 1 9.374 21c-2.331 0-4.512-.645-6.374-1.766Z" />
-                    </svg>
-                    Follow
-                </button>
+            <div v-for="abonne in usersAbo">
+                <div v-if="abonne.utilisateurid == theUser.utilisateurid">
+                    <button class="btunfollow">
+                        <input hidden v-model="idabonne">{{ abonne.utilisateurid }}</input>
+                        <span>Following</span>
+                    </button>
+                </div>
+                <div v-else>
+                    <button class="btfollow" @click="addFollow">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="icon">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M18 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0ZM3 19.235v-.11a6.375 6.375 0 0 1 12.75 0v.109A12.318 12.318 0 0 1 9.374 21c-2.331 0-4.512-.645-6.374-1.766Z" />
+                        </svg>
+                        Follow
+                    </button>
+                </div>
             </div>
-            <!-- <div v-else>
-                <button class="btfollow">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor" class="icon">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M18 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0ZM3 19.235v-.11a6.375 6.375 0 0 1 12.75 0v.109A12.318 12.318 0 0 1 9.374 21c-2.331 0-4.512-.645-6.374-1.766Z" />
-                    </svg>
-                    UnFollow
-                </button>
-            </div> -->
         </div>
         <div class="post-content">
             {{ post.texte }}
@@ -172,6 +181,30 @@ function answer() {
 .btfollow:hover {
     background-color: white;
     color: black;
+}
+
+.btunfollow {
+    display: flex;
+    flex-direction: row;
+    background-color: white;
+    color: black;
+    font-weight: bold;
+    border-radius: 12px;
+    padding: 5px;
+    align-items: center;
+    position: absolute;
+    right: 50px;
+    cursor: pointer;
+}
+.btunfollow:hover {
+    background-color: rgba(244, 33, 46, 0.1);
+    color: rgba(244, 33, 46);
+}
+.btunfollow:hover span{
+    display: none;
+}
+.btunfollow:hover::before{
+    content: "Unfollow";
 }
 
 .icon {

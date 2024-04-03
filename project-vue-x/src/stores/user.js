@@ -5,10 +5,17 @@ import axios from 'axios'
 export const useUserStore = defineStore('users', () => {
     const theUsers = ref([])
     const user = ref()
+    const estAbonne = ref()
     const url = "http://localhost:9090/"
     axios.get(url + "utilisateurs").then(response => {
         theUsers.value = response.data
     })
+
+    function addFollow(idsusers) {
+        axios.post(url+"abonne", idsusers).then( response => {
+            estAbonne.value.splice(0, 0, idsusers)
+        })
+    }
 
     function login(auth) {
         console.log(auth+url)
@@ -215,5 +222,5 @@ export const useUserStore = defineStore('users', () => {
     //     }
     //     ])
 
-  return { theUsers, user, getById, getEstAbonne, login }
+  return { estAbonne, theUsers, user, addFollow, getById, getEstAbonne, login }
 })
