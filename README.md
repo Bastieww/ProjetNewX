@@ -68,10 +68,13 @@ Le projet utilise automatiquement plusieurs port. (grâce au [docker compose](ht
 > Cliquez pour ouvrir votre navigateur : [`http://localhost:65502`](http://localhost:65501)
 
 > Pour se connecter à PgAdmin.
-> 
+>
 > Email : `postgres@postgres.com`
 > 
 > Mot de passe : `postgres` 
+
+> 📢 Host name/address : `PostgresDBApi`
+(Pour ajouter la base de données depuis PgAdmin, disponible uniquement grâce à Docker Compose)
 
 
 ## Pour accéder au site ( Vue.js )
