@@ -52,5 +52,28 @@ export const usePostStore = defineStore('posts', () => {
         thePostsChilds.value = temp
     })
 
-    return { thePosts, thePostsChilds, post, answer, getLikes }
+    function like(iduser , id) {
+        var temp = {
+            utilisateurid : parseInt(iduser),
+            postid : parseInt(id)
+        }
+        axios.post(url+"like",temp).then(response => {
+            return response.data;
+        }
+        )
+    }
+
+    function rt(iduser, id)
+    {
+        var temp = {
+            utilisateurid : parseInt(iduser),
+            postid : parseInt(id)
+        }
+        axios.post(url+"retweet",temp).then(response => {
+            return response.data;
+        }
+        )
+    }
+
+    return { thePosts, thePostsChilds, post, answer, like, rt }
 })
