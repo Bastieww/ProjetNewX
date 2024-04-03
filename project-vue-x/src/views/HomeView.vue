@@ -2,6 +2,7 @@
 import { usePostStore } from '@/stores/posts'
 import { useUserStore } from '@/stores/user'
 import { ref, computed } from 'vue'
+import VueSession from 'vue-session'
 import PostComponent from '@/components/PostComponent.vue'
 import NewPostComponent from '@/components/NewPostComponent.vue'
 import Auth from "@/components/Auth.vue"
