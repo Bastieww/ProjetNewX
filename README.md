@@ -27,9 +27,11 @@ Notre projet actuel vise à créer une plateforme ressemblant à Twitter en util
 
 2. Extraire l'archive du Docker Compose.
 
-3. Dans le même répertoire, démarrer un terminal.
+3. Aller dans le répertoire `release`.
 
-4. Executer la commande suivantes :
+4. Démarrer un terminal dans ce répertoire.
+
+5. Executer la commande suivantes :
    
 ```bat
 docker compose up
