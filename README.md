@@ -66,21 +66,21 @@ Base de données automatiquement créée.
 Le MLD de la base de données :
 ![MDL](https://cdn.discordapp.com/attachments/1220735136220577953/1225082858478239896/owi.png?ex=661fd652&is=660d6152&hm=30f4c61744c6990c99757de5babe47a8cbe15c125f508533745936a1fb87512b&)
 
-> Pour se connecter à la base de données
-> 
-> Utilisateur : `postgres`
-> 
-> Mot de passe : `postgres` 
+Pour se connecter à la base de données
+
+Utilisateur : `postgres`
+
+Mot de passe : `postgres` 
 
 - PgAdmin : 
 
 > Cliquez pour ouvrir votre navigateur : [`http://localhost:65502`](http://localhost:65501)
 
-> Pour se connecter à PgAdmin. 
->
-> Email : `postgres@postgres.com`
-> 
-> Mot de passe : `postgres` 
+Pour se connecter à PgAdmin. 
+
+Email : `postgres@postgres.com`
+ 
+Mot de passe : `postgres` 
 
 > 📢 Host name/address : `PostgresDBApi`
 (Pour ajouter la base de données depuis PgAdmin, disponible uniquement grâce à Docker Compose)
@@ -89,7 +89,7 @@ Le MLD de la base de données :
 
 ## Pour accéder au site ( Vue.js )
 
-> 🌐 Cliquez pour ouvrir votre navigateur : [`http://localhost:65502`](http://localhost:65502)
+### 🌐 Cliquez pour ouvrir votre navigateur : )[`http://localhost:65502`](http://localhost:65502)
 
 
 
