@@ -37,12 +37,8 @@ function post() {
           </button>
         </div>
       </div>
-      <div v-else>
-       
-        <p>Connectez-vous pour interagir avec Y ! (Login : Sky, Password : password1)</p>
-      </div>
+      
       <div v-if="!user.user">
-        <h3>Vous devez être connecté pour voir les posts</h3>
         <Auth />
       </div>
 
