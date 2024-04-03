@@ -10,9 +10,21 @@ import Auth from "@/components/Auth.vue"
 const posts = usePostStore();
 const newPost = ref("")
 const user = useUserStore()
+var followed = ref(null)
+var usersAbo = ref([])
 
 function post() {
   posts.post(newPost.value)
+}
+
+function getAbonne() {
+  user.getEstAbonne(user.user.utilisateurid).then(response => usersAbo.value = response.data)
+}
+function followTrue() {
+  followed = true
+}
+function followFalse() {
+  followed = false
 }
 </script>
 
@@ -42,19 +54,33 @@ function post() {
       <div v-if="!user.user">
         <Auth />
       </div>
-
+      
       <div v-else>
+        {{ getAbonne() }}
+       
         <div class="post-list" v-for="thepost in posts.thePosts">
-          <PostComponent :post="thepost"></PostComponent>
+          <div v-for="abonne in usersAbo">
+            <div v-if="abonne.utilisateurid == thepost.utilisateurid">
+              {{ followTrue() }}
+            </div>
+          </div>
+          <PostComponent :isFollowed="followed" :post="thepost"></PostComponent>
+          {{ followFalse() }}
+
           <div class="childs">
             <div class="uwu"
-              v-for="thepostchild in posts.thePostsChilds.filter(child => child.pos_postid == thepost.postid)">
-              <PostComponent :post="thepostchild"></PostComponent>
+            v-for="thepostchild in posts.thePostsChilds.filter(child => child.pos_postid == thepost.postid)">
+              <div v-for="abonne in usersAbo">
+                <div v-if="abonne.utilisateurid == thepost.utilisateurid">
+                  {{ followTrue() }}
+                </div>
+              </div>
+              <PostComponent :isFollowed="followed" :post="thepostchild"></PostComponent>
+              {{ followFalse() }}
             </div>
           </div>
         </div>
       </div>
-
     </header>
   </section>
 </template>

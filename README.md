@@ -3,7 +3,9 @@
 [![Vue.js](https://img.shields.io/badge/Vue.js-3.4.21-lightgreen?style=flat&logo=vuedotjs&link=https://vuejs.org)](https://vuejs.org)
 [![Node.js](https://img.shields.io/badge/Node.js-v18.19.0-darkgreen?style=flat&logo=nodedotjs&link=https://nodejs.org/en)](https://nodejs.org/en)
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16.2-blue?style=flat&logo=postgresql&link=https://www.docker.com)](https://www.docker.com)
+[![PgAdmin 4](https://img.shields.io/badge/PgAdmin%204-8.4-blue?style=flat&link=https://www.pgadmin.org)](https://www.pgadmin.org)
 [![Docker](https://img.shields.io/badge/Docker-4.28.0-blue?style=flat&logo=Docker&link=https://www.postgresql.org)](https://www.postgresql.org)
+
 
 Notre projet actuel vise à créer une plateforme ressemblant à Twitter en utilisant Vue.js pour le frontend, une API JavaScript pour la communication entre le frontend et le backend, et une base de données PostgreSQL pour la gestion des données.
 
@@ -59,29 +61,35 @@ Le projet utilise automatiquement plusieurs port. (grâce au [docker compose](ht
 
 - PostgreSQL : 
 
-> Pour se connecter à la base de données
-> 
-> Utilisateur : `postgres`
-> 
-> Mot de passe : `postgres` 
+Base de données automatiquement créée.
+
+Le MLD de la base de données :
+![MDL](https://cdn.discordapp.com/attachments/1220735136220577953/1225082858478239896/owi.png?ex=661fd652&is=660d6152&hm=30f4c61744c6990c99757de5babe47a8cbe15c125f508533745936a1fb87512b&)
+
+Pour se connecter à la base de données
+
+Utilisateur : `postgres`
+
+Mot de passe : `postgres` 
 
 - PgAdmin : 
 
 > Cliquez pour ouvrir votre navigateur : [`http://localhost:65502`](http://localhost:65501)
 
-> Pour se connecter à PgAdmin.
->
-> Email : `postgres@postgres.com`
-> 
-> Mot de passe : `postgres` 
+Pour se connecter à PgAdmin. 
+
+Email : `postgres@postgres.com`
+ 
+Mot de passe : `postgres` 
 
 > 📢 Host name/address : `PostgresDBApi`
 (Pour ajouter la base de données depuis PgAdmin, disponible uniquement grâce à Docker Compose)
+![WhereIsIt](https://media.discordapp.net/attachments/1220735136220577953/1225090525552705627/Screenshot_20240403_160502.png?ex=661fdd76&is=660d6876&hm=afa110f4acf214ddb7840c88479d0cbbd37628b34dd773d2d3807e79f69a28de&=&format=webp&quality=lossless&width=1096&height=253)
 
 
 ## Pour accéder au site ( Vue.js )
 
-> 🌐 Cliquez pour ouvrir votre navigateur : [`http://localhost:65502`](http://localhost:65502)
+ 🌐 Cliquez pour ouvrir votre navigateur : [`http://localhost:65502`](http://localhost:65502)
 
 
 

@@ -13,7 +13,12 @@ export const useUserStore = defineStore('users', () => {
     })
 
     function addFollow(idsusers) {
-        axios.post(url + "abonne", idsusers).then(response => {
+        axios.post(url+"abonne", idsusers).then( response => {
+            console.log(response)
+        })
+    }
+    function removeFollow(idsusers) {
+        axios.post(url+"abonne", idsusers).then( response => {
             console.log(response)
         })
     }
