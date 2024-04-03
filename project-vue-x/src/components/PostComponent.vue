@@ -16,8 +16,6 @@ const posts = usePostStore()
 const newAnsweringPost = ref("")
 var theUser = ref(null)
 var usersAbo = ref([])
-const utilisateurid = ref()
-const uti_utilisateurid = ref()
 
 var likes = ref(null)
 posts.getLikes(props.post.postid).then(response => likes.value = response.data)
@@ -38,15 +36,15 @@ function answer() {
 }
 
 function addFollow(abonneur, abonne) {
-    console.log(abonneur.utilisateurid)
+    console.log(abonneur)
     users.addFollow({
         utilisateurid: parseInt(abonneur),
         uti_utilisateurid: parseInt(abonne)
     })
 }
 function removeFollow(abonneur, abonne) {
-    console.log(abonneur.utilisateurid)
-    users.addFollow({
+    console.log(abonneur)
+    users.removeFollow({
         utilisateurid: parseInt(abonneur),
         uti_utilisateurid: parseInt(abonne)
     })
@@ -69,7 +67,7 @@ function rt() {
             <img :src="'/img/' + theUser.urlphotoprofil" class="user-profile-pic" alt="Profile Picture">
             <div class="user-info">{{ theUser.pseudo }}</div>
                 <div v-if="isFollowed">
-                    <button class="btunfollow" @click="removefollow()">
+                    <button class="btunfollow" @click="removeFollow(users.user.utilisateurid, theUser.utilisateurid)">
                         <span>Following</span>
                     </button>
                 </div>

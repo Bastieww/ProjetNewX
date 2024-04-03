@@ -56,7 +56,7 @@ function followFalse() {
       </div>
       
       <div v-else>
-        {{ getAbonne() }}
+
        
         <div class="post-list" v-for="thepost in posts.thePosts">
           <div v-for="abonne in usersAbo">

@@ -197,13 +197,14 @@ app.post("/abonne", async (req, res) => {
 })
 
 app.delete("/abonne/del", async (req, res) => {
-    if (req.query.id && req.query.idabonne) {
+    res.status().json(req)
+    if (req.body.utilisateurid && req.body.uti_utilisateurid) {
         try {
             const abonne = await prisma.est_abonne.delete({
                 where: {
                     utilisateurid_uti_utilisateurid: {
-                        utilisateurid: parseInt(req.query.id),
-                        uti_utilisateurid: parseInt(req.query.idabonne)
+                        utilisateurid: req.query.utilisateurid,
+                        uti_utilisateurid: req.query.uti_utilisateurid
                     }
                 }
             })

@@ -17,8 +17,12 @@ export const useUserStore = defineStore('users', () => {
             console.log(response)
         })
     }
+
     function removeFollow(idsusers) {
-        axios.post(url+"abonne", idsusers).then( response => {
+        console.log(idsusers)
+        console.log(url+"abonne/del")
+        
+        axios.delete(url+"abonne/del", idsusers).then( response => {
             console.log(response)
         })
     }
@@ -42,5 +46,5 @@ export const useUserStore = defineStore('users', () => {
         return abo
     }
 
-    return { theUsers, user, addFollow, getById, getEstAbonne, login }
+    return { theUsers, user, addFollow, removeFollow, getById, getEstAbonne, login }
 })
