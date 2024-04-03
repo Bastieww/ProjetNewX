@@ -18,11 +18,17 @@ services:
       PGADMIN_DEFAULT_EMAIL: admin@postgres.com
       PGADMIN_DEFAULT_PASSWORD: postgres
     ports:
-      - "65001:80"
+      - "65501:80"
     
-  node:
+  apijs:
     image: skyhonnor/apiy
-    container_name: NodeJSApi
+    container_name: NodeApi
     ports:
       - "9090:9090"
+
+  clientapijs:
+    image: skyhonnor/clientapiy
+    container_name: NodeClientVue
+    ports:
+      - "65502:80"
     
