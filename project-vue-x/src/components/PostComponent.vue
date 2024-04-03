@@ -33,6 +33,7 @@ function answeringSwap() {
 function answer() {
     posts.answer(newAnsweringPost.value, props.post.postid)
 }
+
 function addFollow(abonneur, abonne) {
     console.log(abonneur.utilisateurid)
     users.addFollow({

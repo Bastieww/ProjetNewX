@@ -37,5 +37,10 @@ export const useUserStore = defineStore('users', () => {
         return abo
     }
 
-    return { theUsers, user, addFollow, getById, getEstAbonne, login }
+    function getQuiEstAbonne(id) {
+        let abo = axios.get(url + "qui_est_abonne?id=" + id)
+        return abo
+    }
+
+    return { theUsers, user, addFollow, getById, getEstAbonne,getQuiEstAbonne , login }
 })
