@@ -89,7 +89,7 @@ Mot de passe : `postgres`
 
 ## Pour accéder au site ( Vue.js )
 
-### 🌐 Cliquez pour ouvrir votre navigateur : )[`http://localhost:65502`](http://localhost:65502)
+ 🌐 Cliquez pour ouvrir votre navigateur : [`http://localhost:65502`](http://localhost:65502)
 
 
 
