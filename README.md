@@ -2,7 +2,7 @@
 
 [![Vue.js](https://img.shields.io/badge/Vue.js-3.4.21-lightgreen?style=flat&logo=vuedotjs&link=https://vuejs.org)](https://vuejs.org)
 [![Node.js](https://img.shields.io/badge/Node.js-v18.19.0-darkgreen?style=flat&logo=nodedotjs&link=https://nodejs.org/en)](https://nodejs.org/en)
-[![Node.js](https://img.shields.io/badge/PostgreSQL-16.2-blue?labelColor=white&style=flat&logo=postgresql&link=https://www.docker.com)](https://www.docker.com)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16.2-blue?style=flat&logo=postgresql&link=https://www.docker.com)](https://www.docker.com)
 [![Docker](https://img.shields.io/badge/Docker-4.28.0-blue?style=flat&logo=Docker&link=https://www.postgresql.org)](https://www.postgresql.org)
 
 Notre projet actuel vise à créer une plateforme ressemblant à Twitter en utilisant Vue.js pour le frontend, une API JavaScript pour la communication entre le frontend et le backend, et une base de données PostgreSQL pour la gestion des données.
