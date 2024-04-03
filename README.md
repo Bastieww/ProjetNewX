@@ -57,6 +57,11 @@ Le projet utilise automatiquement plusieurs port. (grâce au [docker compose](ht
 | NodeJs API | 9090 |
 | NodeJs Vue.js | 65502 |
 
+## Pour accéder au site ( Vue.js )
+
+ 🌐 Cliquez pour ouvrir votre navigateur : [`http://localhost:65502`](http://localhost:65502)
+
+- - -
 ### Les mots de passe :
 
 - PostgreSQL : 
@@ -85,11 +90,4 @@ Mot de passe : `postgres`
 > 📢 Host name/address : `PostgresDBApi`
 (Pour ajouter la base de données depuis PgAdmin, disponible uniquement grâce à Docker Compose)
 ![WhereIsIt](https://media.discordapp.net/attachments/1220735136220577953/1225090525552705627/Screenshot_20240403_160502.png?ex=661fdd76&is=660d6876&hm=afa110f4acf214ddb7840c88479d0cbbd37628b34dd773d2d3807e79f69a28de&=&format=webp&quality=lossless&width=1096&height=253)
-
-
-## Pour accéder au site ( Vue.js )
-
- 🌐 Cliquez pour ouvrir votre navigateur : [`http://localhost:65502`](http://localhost:65502)
-
-
 
