@@ -21,7 +21,7 @@ function post() {
       <div v-if="user.user">
         <div class="post-card">
           <div class="post-head">
-            <img :src="'/src/assets/img/' + user.user.urlphotoprofil" class="user-profile-pic" alt="Profile Picture">
+            <img :src="'/img/' + user.user.urlphotoprofil" class="user-profile-pic" alt="Profile Picture">
             <div class="user-info">Connecté en tant que {{ user.user.pseudo }}</div>
           </div>
           <div class="post-content">

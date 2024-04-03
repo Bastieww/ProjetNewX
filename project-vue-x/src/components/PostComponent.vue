@@ -55,7 +55,7 @@ function rt()
 <template>
     <div class="post-card" v-if="theUser">
         <div class="post-head">
-            <img :src="'/src/assets/img/' + theUser.urlphotoprofil" class="user-profile-pic" alt="Profile Picture">
+            <img :src="'/img/' + theUser.urlphotoprofil" class="user-profile-pic" alt="Profile Picture">
             <div class="user-info">{{ theUser.pseudo }}</div>
             <div v-for="abonne in usersAbo">
                 <div v-if="abonne.utilisateurid == theUser.utilisateurid">

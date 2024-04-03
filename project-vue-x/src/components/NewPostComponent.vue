@@ -5,7 +5,7 @@
 <template>
     <div class="post-card">
         <div class="post-head">
-            <img :src="'/src/assets/img/image.png'" class="user-profile-pic" alt="Profile Picture">
+            <img :src="'/img/image.png'" class="user-profile-pic" alt="Profile Picture">
             <div class="user-info">GGremie</div>
         </div>
         <div class="post-content">
