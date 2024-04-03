@@ -75,5 +75,5 @@ export const usePostStore = defineStore('posts', () => {
         )
     }
 
-    return { thePosts, thePostsChilds, post, answer, like, rt }
+    return { thePosts, thePostsChilds, post, answer,getLikes, like, rt }
 })
