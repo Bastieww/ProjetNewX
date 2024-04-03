@@ -23,15 +23,13 @@ Notre projet actuel vise à créer une plateforme ressemblant à Twitter en util
 
 ### Début de l'installation : 
 
-1. Télécharger le Docker Compose :
+1. Télécharger le Docker Compose : [Télécharger le Docker Compose]()
 
-### > [Télécharger le projet]()
+2. Extraire l'archive du Docker Compose.
 
-2. Dezip le zip avec le Docker compose 
+3. Dans le même répertoire, démarrer un terminal.
 
-3. Dans le même répertoire démarrez un terminal
-
-4. Executer les commandes suivantes :
+4. Executer la commande suivantes :
    
 ```bat
 docker compose up
