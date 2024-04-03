@@ -22,7 +22,7 @@ const users = useUserStore()
           <img :src="'/img/' + user.urlphotoprofil" class="user-profile-pic" alt="Profile Picture">
         </div>
         <div class="edit-container">
-          <button class="edit-profile-btn">Editer le profile</button>
+          <button class="edit-profile-btn">Editer le profil</button>
         </div>
         <div class="user-info">
           <h2>{{ user.name }}</h2>
@@ -30,7 +30,7 @@ const users = useUserStore()
           <p class="user-bio">{{ user.bio }}</p>
           <p>Rejoint en {{ user.joindate }}</p>
           <div style="display: flex;">
-            <p>Following d</p>
+            <p>Followind : </p>
             <p>Followers</p>
           </div>
         </div>

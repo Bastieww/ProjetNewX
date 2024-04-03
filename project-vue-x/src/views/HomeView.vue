@@ -47,7 +47,7 @@ function post() {
         <div class="post-list" v-for="thepost in posts.thePosts">
           <PostComponent :post="thepost"></PostComponent>
           <div class="childs">
-            <div class="post-card"
+            <div class="uwu"
               v-for="thepostchild in posts.thePostsChilds.filter(child => child.pos_postid == thepost.postid)">
               <PostComponent :post="thepostchild"></PostComponent>
             </div>
@@ -60,6 +60,10 @@ function post() {
 </template>
 
 <style>
+.uwu {
+  margin-left: 50px;
+  margin-bottom: 40px;
+}
 .btenvoi {
   display: flex;
   flex-direction: row;

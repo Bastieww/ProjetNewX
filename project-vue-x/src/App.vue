@@ -1,7 +1,12 @@
 <script setup>
-  import { RouterLink, RouterView } from 'vue-router'
+  import { RouterLink, RouterView} from 'vue-router'
   import MenuComponent from './components/MenuComponent.vue'
-  
+
+  const logout = () => {
+    sessionStorage.removeItem('user');
+    location.reload(); 
+    
+  };
 </script>
 
 <template>
@@ -20,10 +25,11 @@
         <MenuComponent menuTEXT="Explore" to="/search"></MenuComponent>
         <MenuComponent menuTEXT="Profile" to="/profile"></MenuComponent>
       </nav>
+      
       <div class="col2">
         <RouterView />
       </div>
-      
+      <button class="logout-btn" @click="logout">Logout</button>
     </div>
     
   </header>
@@ -93,5 +99,17 @@
     position: absolute;
     bottom: 0px;
   }
+
+  .logout-btn {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    padding: 10px 20px;
+    background-color: #ff0000; /* Change color as needed */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
 </style>
-<!-- Imene la besti -->
+<!-- Imene la besti (ou pas en fait lol, elle est italienne et chacun sa route) -->
