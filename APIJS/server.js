@@ -184,7 +184,12 @@ app.get("/qui_est_abonne", async (req, res) => {
 
 app.post("/abonne", async (req, res) => {
     try {
-        const abonne = await prisma.est_abonne.create({ data: req.body })
+        const abonne = await prisma.est_abonne.create({ 
+            data: {
+                utilisateurid: req.body.utilisateurid,
+                uti_utilisateurid: req.body.uti_utilisateurid
+            }
+        })
         res.status(201).json();
     } catch (error) {
         res.status(500).json({ error: error });

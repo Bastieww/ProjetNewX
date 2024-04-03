@@ -30,10 +30,11 @@ function answeringSwap() {
 function answer() {
     posts.answer(newAnsweringPost.value, props.post.postid)
 }
-function addFollow() {
-    user.addFollow({
-        utilisateurid: theUser.utilisateurid,
-        uti_utilisateurid: idabonne
+function addFollow(abonneur, abonne) {
+    console.log(abonneur.utilisateurid)
+    users.addFollow({
+        utilisateurid: parseInt(abonneur),
+        uti_utilisateurid: parseInt(abonne)
     })
 }
 
@@ -60,12 +61,11 @@ function rt()
             <div v-for="abonne in usersAbo">
                 <div v-if="abonne.utilisateurid == theUser.utilisateurid">
                     <button class="btunfollow">
-                        <input hidden v-model="idabonne">{{ abonne.utilisateurid }}</input>
                         <span>Following</span>
                     </button>
                 </div>
                 <div v-else>
-                    <button class="btfollow" @click="addFollow">
+                    <button class="btfollow" @click="addFollow(users.user.utilisateurid, theUser.utilisateurid)">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="icon">
                             <path stroke-linecap="round" stroke-linejoin="round"

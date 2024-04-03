@@ -13,7 +13,7 @@ export const useUserStore = defineStore('users', () => {
 
     function addFollow(idsusers) {
         axios.post(url+"abonne", idsusers).then( response => {
-            estAbonne.value.splice(0, 0, idsusers)
+            console.log(response)
         })
     }
 
