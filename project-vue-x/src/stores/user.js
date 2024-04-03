@@ -16,6 +16,11 @@ export const useUserStore = defineStore('users', () => {
             console.log(response)
         })
     }
+    function removeFollow(idsusers) {
+        axios.post(url+"abonne", idsusers).then( response => {
+            console.log(response)
+        })
+    }
 
     function login(auth) {
         console.log(auth+url)
@@ -222,5 +227,5 @@ export const useUserStore = defineStore('users', () => {
     //     }
     //     ])
 
-  return { estAbonne, theUsers, user, addFollow, getById, getEstAbonne, login }
+  return { estAbonne, theUsers, user, addFollow, removeFollow, getById, getEstAbonne, login }
 })

@@ -6,6 +6,9 @@ import { createPinia } from 'pinia';
 const props = defineProps({
     post: {
         required: true
+    },
+    isFollowed: {
+        required: true
     }
 })
 const users = useUserStore()
@@ -33,6 +36,7 @@ function answeringSwap() {
 function answer() {
     posts.answer(newAnsweringPost.value, props.post.postid)
 }
+
 function addFollow(abonneur, abonne) {
     console.log(abonneur.utilisateurid)
     users.addFollow({
@@ -40,13 +44,20 @@ function addFollow(abonneur, abonne) {
         uti_utilisateurid: parseInt(abonne)
     })
 }
+function removeFollow(abonneur, abonne) {
+    console.log(abonneur.utilisateurid)
+    users.addFollow({
+        utilisateurid: parseInt(abonneur),
+        uti_utilisateurid: parseInt(abonne)
+    })
+}
+
 
 function like() {
     posts.like(theUser.value.utilisateurid, props.post.postid)
 }
 
-function rt()
-{
+function rt() {
     posts.rt(theUser.value.utilisateurid, props.post.postid)
 }
 
@@ -57,9 +68,8 @@ function rt()
         <div class="post-head">
             <img :src="'/img/' + theUser.urlphotoprofil" class="user-profile-pic" alt="Profile Picture">
             <div class="user-info">{{ theUser.pseudo }}</div>
-            <div v-for="abonne in usersAbo">
-                <div v-if="abonne.utilisateurid == theUser.utilisateurid">
-                    <button class="btunfollow">
+                <div v-if="isFollowed">
+                    <button class="btunfollow" @click="removefollow()">
                         <span>Following</span>
                     </button>
                 </div>
@@ -74,42 +84,41 @@ function rt()
                     </button>
                 </div>
             </div>
-        </div>
-        <div class="post-content">
-            {{ post.texte }}
-        </div>
-        <div v-if="answering == true" class="post-content">
-            <div class="post-card">
-                <div class="post-content">
-                    <textarea class="textareamessage" maxlength="280" placeholder="Mon message..."
-                        v-model="newAnsweringPost"></textarea>
+            <div class="post-content">
+                {{ post.texte }}
+            </div>
+            <div v-if="answering == true" class="post-content">
+                <div class="post-card">
+                    <div class="post-content">
+                        <textarea class="textareamessage" maxlength="280" placeholder="Mon message..."
+                            v-model="newAnsweringPost"></textarea>
+                    </div>
+                    <button @click="answer" class="btenvoi">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="icon">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M6 12 3.269 3.125A59.769 59.769 0 0 1 21.485 12 59.768 59.768 0 0 1 3.27 20.875L5.999 12Zm0 0h7.5" />
+                        </svg>
+                        Envoyer
+                    </button>
                 </div>
-                <button @click="answer" class="btenvoi">
+            </div>
+            <div class="post-end" v-if="props.post.pos_postid == null">
+                <div class="comment" @click="answeringSwap">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="icon">
                         <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M6 12 3.269 3.125A59.769 59.769 0 0 1 21.485 12 59.768 59.768 0 0 1 3.27 20.875L5.999 12Zm0 0h7.5" />
+                            d="M8.625 9.75a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0h-.375m-13.5 3.01c0 1.6 1.123 2.994 2.707 3.227 1.087.16 2.185.283 3.293.369V21l4.184-4.183a1.14 1.14 0 0 1 .778-.332 48.294 48.294 0 0 0 5.83-.498c1.585-.233 2.708-1.626 2.708-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z" />
                     </svg>
-                    Envoyer
-                </button>
-            </div>
-        </div>
-        <div class="post-end" v-if="props.post.pos_postid == null">
-            <div class="comment" @click="answeringSwap">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                    stroke="currentColor" class="icon">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M8.625 9.75a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0h-.375m-13.5 3.01c0 1.6 1.123 2.994 2.707 3.227 1.087.16 2.185.283 3.293.369V21l4.184-4.183a1.14 1.14 0 0 1 .778-.332 48.294 48.294 0 0 0 5.83-.498c1.585-.233 2.708-1.626 2.708-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z" />
-                </svg>
-            </div>
-            <div class="retweet" @click="rt">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                    stroke="currentColor" class="icon">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 0 0-3.7-3.7 48.678 48.678 0 0 0-7.324 0 4.006 4.006 0 0 0-3.7 3.7c-.017.22-.032.441-.046.662M19.5 12l3-3m-3 3-3-3m-12 3c0 1.232.046 2.453.138 3.662a4.006 4.006 0 0 0 3.7 3.7 48.656 48.656 0 0 0 7.324 0 4.006 4.006 0 0 0 3.7-3.7c.017-.22.032-.441.046-.662M4.5 12l3 3m-3-3-3 3" />
-                </svg>
+                </div>
+                <div class="retweet" @click="rt">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="icon">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 0 0-3.7-3.7 48.678 48.678 0 0 0-7.324 0 4.006 4.006 0 0 0-3.7 3.7c-.017.22-.032.441-.046.662M19.5 12l3-3m-3 3-3-3m-12 3c0 1.232.046 2.453.138 3.662a4.006 4.006 0 0 0 3.7 3.7 48.656 48.656 0 0 0 7.324 0 4.006 4.006 0 0 0 3.7-3.7c.017-.22.032-.441.046-.662M4.5 12l3 3m-3-3-3 3" />
+                    </svg>
 
-            </div>
+                </div>
             <div class="like" @click="like">
 
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
