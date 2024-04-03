@@ -84,7 +84,7 @@ Mot de passe : `postgres`
 
 > 📢 Host name/address : `PostgresDBApi`
 (Pour ajouter la base de données depuis PgAdmin, disponible uniquement grâce à Docker Compose)
-![WhereIsIt](https://cdn.discordapp.com/attachments/1220735136220577953/1225086088964608020/Screenshot_20240403_160502.png?ex=661fd954&is=660d6454&hm=e8caaf9ff70f15a690626fd71a3f70adbdeb91b30d47c948652c63f916e015ab&)
+![WhereIsIt](https://media.discordapp.net/attachments/1220735136220577953/1225090525552705627/Screenshot_20240403_160502.png?ex=661fdd76&is=660d6876&hm=afa110f4acf214ddb7840c88479d0cbbd37628b34dd773d2d3807e79f69a28de&=&format=webp&quality=lossless&width=1096&height=253)
 
 
 ## Pour accéder au site ( Vue.js )
