@@ -8,6 +8,12 @@ var usersFollowers = ref([])
 let user = users.user
 users.getEstAbonne(users.user.utilisateurid).then(response => usersAbo.value = response.data)
 users.getQuiEstAbonne(users.user.utilisateurid).then(response => usersFollowers.value = response.data)
+
+if(!users.user)
+{
+    const router = useRouter()
+    router.push({name:"home"})
+}
 </script>
 <template>
   <div v-if="usersAbo && usersFollowers"></div>

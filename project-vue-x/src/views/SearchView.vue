@@ -1,7 +1,9 @@
 <script setup>
+import { useRouter } from 'vue-router';
 import {useUserStore} from '@/stores/user'
 import User from '@/components/User.vue'
 import { ref,computed } from 'vue';
+
 const users = useUserStore()
 
 const filter = ref("")
@@ -10,6 +12,13 @@ const filteredUsers = computed(() =>{
   return users.theUsers.filter(
     usertemp => usertemp.pseudo.toLowerCase().indexOf(filter.value) != -1)
 })
+
+
+if(!users.user)
+{
+    const router = useRouter()
+    router.push({name:"home"})
+}
 </script>
 
 <template>
