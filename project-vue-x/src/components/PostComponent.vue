@@ -16,9 +16,12 @@ var usersAbo = ref([])
 const utilisateurid = ref()
 const uti_utilisateurid = ref()
 
+var likes = ref(null)
+posts.getLikes(props.post.postid).then(response => likes.value = response.data)
+
 users.getById(props.post.utilisateurid).then(response => theUser.value = response.data)
+
 users.getEstAbonne(users.user.utilisateurid).then(response => usersAbo.value = response.data)
-console.log(usersAbo)
 
 
 let answering = ref(false)
@@ -38,10 +41,6 @@ function addFollow(abonneur, abonne) {
     })
 }
 
-var likes = ref(null)
-posts.getLikes(props.post.postid).then(response => likes.value = response.data)
-
-
 function like() {
     posts.like(theUser.value.utilisateurid, props.post.postid)
 }
@@ -56,7 +55,7 @@ function rt()
 <template>
     <div class="post-card" v-if="theUser">
         <div class="post-head">
-            <img :src="'/src/assets/img/' + theUser.urlphotoprofil" class="user-profile-pic" alt="Profile Picture">
+            <img :src="'/img/' + theUser.urlphotoprofil" class="user-profile-pic" alt="Profile Picture">
             <div class="user-info">{{ theUser.pseudo }}</div>
             <div v-for="abonne in usersAbo">
                 <div v-if="abonne.utilisateurid == theUser.utilisateurid">

@@ -19,7 +19,7 @@ const users = useUserStore()
         <div class="user-images" style="display: flex;">
           <div class="banner"></div>
           <p class="profile-background"></p>
-          <img :src="'/src/assets/img/' + user.urlphotoprofil" class="user-profile-pic" alt="Profile Picture">
+          <img :src="'/img/' + user.urlphotoprofil" class="user-profile-pic" alt="Profile Picture">
         </div>
         <div class="edit-container">
           <button class="edit-profile-btn">Editer le profile</button>

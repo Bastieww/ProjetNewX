@@ -36,7 +36,6 @@ export const usePostStore = defineStore('posts', () => {
 
     async function getLikes(postid) {
         let u = await axios.get(url + "nbrlike?id=" + postid)
-        console.log("u " + u)
         return u
     }
 

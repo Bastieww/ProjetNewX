@@ -19,7 +19,7 @@ const filteredUsers = computed(() =>{
     </div>
     <div class="user-list">
       <div v-for="user in filteredUsers" :key="user.pseudo" class="user-card">
-        <img :src="'/src/assets/img/' + user.urlphotoprofil" class="user-profile-pic" alt="Profile Picture">
+        <img :src="'/img/' + user.urlphotoprofil" class="user-profile-pic" alt="Profile Picture">
         <div class="user-info">
           <div class="splite">
             <span>

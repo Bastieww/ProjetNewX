@@ -2,6 +2,7 @@
 import { usePostStore } from '@/stores/posts'
 import { useUserStore } from '@/stores/user'
 import { ref, computed } from 'vue'
+import VueSession from 'vue-session'
 import PostComponent from '@/components/PostComponent.vue'
 import NewPostComponent from '@/components/NewPostComponent.vue'
 import Auth from "@/components/Auth.vue"
@@ -21,7 +22,7 @@ function post() {
       <div v-if="user.user">
         <div class="post-card">
           <div class="post-head">
-            <img :src="'/src/assets/img/' + user.user.urlphotoprofil" class="user-profile-pic" alt="Profile Picture">
+            <img :src="'/img/' + user.user.urlphotoprofil" class="user-profile-pic" alt="Profile Picture">
             <div class="user-info">Connecté en tant que {{ user.user.pseudo }}</div>
           </div>
           <div class="post-content">
@@ -37,12 +38,8 @@ function post() {
           </button>
         </div>
       </div>
-      <div v-else>
-       
-        <p>Connectez-vous pour interagir avec Y ! (Login : Sky, Password : password1)</p>
-      </div>
+      
       <div v-if="!user.user">
-        <h3>Vous devez être connecté pour voir les posts</h3>
         <Auth />
       </div>
 
