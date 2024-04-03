@@ -42,7 +42,7 @@ docker compose up
 
 # Accédez au projet
 
-Le projet utilise automatiquement (grâce au [docker compose](https://docs.docker.com/compose/)) plusieurs port.
+Le projet utilise automatiquement plusieurs port. (grâce au [docker compose](https://docs.docker.com/compose/))
 
 > 📢 Les ports utilisés sont configuré dans le compose.yaml
 
