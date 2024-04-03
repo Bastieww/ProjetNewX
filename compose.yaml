@@ -15,7 +15,7 @@ services:
     image: elestio/pgadmin
     container_name: PgAdmin
     environment:
-      PGADMIN_DEFAULT_EMAIL: admin@postgres.com
+      PGADMIN_DEFAULT_EMAIL: postgres@postgres.com
       PGADMIN_DEFAULT_PASSWORD: postgres
     ports:
       - "65501:80"
