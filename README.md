@@ -74,7 +74,7 @@ Mot de passe : `postgres`
 
 - PgAdmin : 
 
-> Cliquez pour ouvrir votre navigateur : [`http://localhost:65502`](http://localhost:65501)
+> Cliquez pour ouvrir votre navigateur : [`http://localhost:65502`](http://localhost:65501 "target=_blank")
 
 Pour se connecter à PgAdmin. 
 
@@ -89,7 +89,7 @@ Mot de passe : `postgres`
 
 ## Pour accéder au site ( Vue.js )
 
- 🌐 Cliquez pour ouvrir votre navigateur : [`http://localhost:65502`](http://localhost:65502)
+ 🌐 Cliquez pour ouvrir votre navigateur : [`http://localhost:65502`](http://localhost:65502 "target=_blank")
 
 
 
