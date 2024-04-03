@@ -2,7 +2,7 @@
 
 [![Vue.js](https://img.shields.io/badge/Vue.js-3.4.21-lightgreen?style=flat&logo=vuedotjs&link=https://vuejs.org)](https://vuejs.org)
 [![Node.js](https://img.shields.io/badge/Node.js-v18.19.0-darkgreen?style=flat&logo=nodedotjs&link=https://nodejs.org/en)](https://nodejs.org/en)
-[![Node.js](https://img.shields.io/badge/PostgreSQL-16.2-blue?labelColor=white&style=flat&logo=postgresql&link=https://www.docker.com)](https://www.docker.com)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16.2-blue?style=flat&logo=postgresql&link=https://www.docker.com)](https://www.docker.com)
 [![Docker](https://img.shields.io/badge/Docker-4.28.0-blue?style=flat&logo=Docker&link=https://www.postgresql.org)](https://www.postgresql.org)
 
 Notre projet actuel vise à créer une plateforme ressemblant à Twitter en utilisant Vue.js pour le frontend, une API JavaScript pour la communication entre le frontend et le backend, et une base de données PostgreSQL pour la gestion des données.
@@ -23,15 +23,15 @@ Notre projet actuel vise à créer une plateforme ressemblant à Twitter en util
 
 ### Début de l'installation : 
 
-1. Télécharger le Docker Compose :
+1. Télécharger le Docker Compose : [Télécharger le Docker Compose]()
 
-### > [Télécharger le projet]()
+2. Extraire l'archive du Docker Compose.
 
-2. Dezip le zip avec le Docker compose 
+3. Aller dans le répertoire `release`.
 
-3. Dans le même répertoire démarrez un terminal
+4. Démarrer un terminal dans ce répertoire.
 
-4. Executer les commandes suivantes :
+5. Executer la commande suivantes :
    
 ```bat
 docker compose up
@@ -44,7 +44,7 @@ docker compose up
 
 # Accédez au projet
 
-Le projet utilise automatiquement (grâce au [docker compose](https://docs.docker.com/compose/)) plusieurs port.
+Le projet utilise automatiquement plusieurs port. (grâce au [docker compose](https://docs.docker.com/compose/))
 
 > 📢 Les ports utilisés sont configuré dans le compose.yaml
 
@@ -59,17 +59,24 @@ Le projet utilise automatiquement (grâce au [docker compose](https://docs.docke
 
 - PostgreSQL : 
 
-> `user : postgres`
+> Pour se connecter à la base de données
 > 
-> `password : postgres` 
+> Utilisateur : `postgres`
+> 
+> Mot de passe : `postgres` 
 
 - PgAdmin : 
 
 > Cliquez pour ouvrir votre navigateur : [`http://localhost:65502`](http://localhost:65501)
 
-> `user : postgres@postgres.com`
+> Pour se connecter à PgAdmin.
+>
+> Email : `postgres@postgres.com`
 > 
-> `password : postgres` 
+> Mot de passe : `postgres` 
+
+> 📢 Host name/address : `PostgresDBApi`
+(Pour ajouter la base de données depuis PgAdmin, disponible uniquement grâce à Docker Compose)
 
 
 ## Pour accéder au site ( Vue.js )

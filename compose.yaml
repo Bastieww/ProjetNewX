@@ -1,15 +1,10 @@
 services:
 
   postgres:
-    image: postgres
+    image: skyhonnor/dbapiy
     container_name: PostgresDBApi
     ports:
       - "65500:5432"
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres  
-    volumes:
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
 
   pgadmin:
     image: elestio/pgadmin
