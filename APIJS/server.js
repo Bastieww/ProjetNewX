@@ -294,7 +294,7 @@ app.get("/nbrlike", async (req, res) => {
                 }
             })
 
-            res.json({ "nbrlike": nbr })
+            res.json({ nbrlikes: nbr })
         } catch (error) {
             res.status(500).json({ error: error });
         }
@@ -303,6 +303,9 @@ app.get("/nbrlike", async (req, res) => {
         res.status(400).json({ error: "Paramètre 'id' manquant dans la requête GET" });
     }
 })
+
+
+
 
 app.get("/a_like", async (req, res) => {
 
