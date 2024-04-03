@@ -20,7 +20,7 @@ export const usePostStore = defineStore('posts', () => {
         })
     }
 
-    function answer(texte,idansweredpost) {
+    function answer(texte, idansweredpost) {
 
         let newPost = {
             texte: texte,
@@ -34,17 +34,23 @@ export const usePostStore = defineStore('posts', () => {
         })
     }
 
-        axios.get(url + "posts").then(response => {
-            var temp = Array.from(response.data).filter(p => p.pos_postid == null)//Enleve les posts "enfants"
-            temp.sort((a,b)=>a.postid<b.postid?1:-1)
-            thePosts.value = temp
-        })                                                                                                              //OOOOOUUUUOUOUUUU LE CODE GOOOFFYYYY BY BASTIEWWW
+    async function getLikes(postid) {
+        let u = await axios.get(url + "nbrlike?id=" + postid)
+        console.log("u " + u)
+        return u
+    }
 
-        axios.get(url + "posts").then(response => {
-            var temp = Array.from(response.data).filter(p => p.pos_postid != null)//Ne garde que les posts "enfants"
-            temp.sort((a,b)=>a.postid<b.postid?1:-1)
-            thePostsChilds.value = temp
-        })
+    axios.get(url + "posts").then(response => {
+        var temp = Array.from(response.data).filter(p => p.pos_postid == null)//Enleve les posts "enfants"
+        temp.sort((a, b) => a.postid < b.postid ? 1 : -1)
+        thePosts.value = temp
+    })                                                                                                              //OOOOOUUUUOUOUUUU LE CODE GOOOFFYYYY BY BASTIEWWW
 
-    return { thePosts, thePostsChilds, post, answer }
+    axios.get(url + "posts").then(response => {
+        var temp = Array.from(response.data).filter(p => p.pos_postid != null)//Ne garde que les posts "enfants"
+        temp.sort((a, b) => a.postid < b.postid ? 1 : -1)
+        thePostsChilds.value = temp
+    })
+
+    return { thePosts, thePostsChilds, post, answer, getLikes }
 })
