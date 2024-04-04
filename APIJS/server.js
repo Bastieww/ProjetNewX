@@ -492,10 +492,10 @@ app.post("/retweet", async (req, res) => {
     }
 })
 
-app.delete("/like/del", async (req, res) => {
+app.delete("/retweet/del", async (req, res) => {
     if (req.query.id && req.query.postid) {
         try {
-            const like = await prisma.retweet.delete({
+            const retweet = await prisma.retweet.delete({
                 where: {
                     utilisateurid_postid: {
                         utilisateurid: parseInt(req.query.id),
@@ -512,6 +512,8 @@ app.delete("/like/del", async (req, res) => {
         res.status(400).json({ error: "Paramètre 'id' et/ou 'postid' manquant dans la requête DELETE" });
     }
 })
+
+
 
 /**
  * 

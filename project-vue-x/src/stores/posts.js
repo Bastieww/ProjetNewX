@@ -44,6 +44,11 @@ export const usePostStore = defineStore('posts', () => {
         let u = await axios.get(url + "qui_a_like?id=" + postid)
         return u
     }
+
+    async function getRts(postid) {
+        let u = await axios.get(url + "qui_a_retweet?id=" + postid)
+        return u
+    }
     
 
     axios.get(url + "posts").then(response => {
@@ -86,10 +91,20 @@ export const usePostStore = defineStore('posts', () => {
             postid : parseInt(id)
         }
         axios.post(url+"retweet",temp).then(response => {
-            return response.data;
+            location.reload();
         }
         )
     }
 
-    return { thePosts, thePostsChilds, post, answer,getLikes, like, rt, unlike }
+    async function unrt(ids) {
+        try {
+            const response = await axios.delete(url + "retweet/del",{params: ids});
+            location.reload();
+            console.log(response);
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    return { thePosts, thePostsChilds, post, answer,getLikes, like, rt, unlike, getRts, unrt }
 })

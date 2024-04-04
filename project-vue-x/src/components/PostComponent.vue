@@ -15,8 +15,10 @@ var theUser = ref(null)
 var usersAbo = ref([])
 
 var likes = ref([])
+var rts = ref([])
 
 posts.getLikes(props.post.postid).then(response => likes.value = response.data)
+posts.getRts(props.post.postid).then(response => rts.value = response.data)
 
 users.getById(props.post.utilisateurid).then(response => theUser.value = response.data)
 
@@ -37,12 +39,11 @@ function answer() {
 
 let isUserInAbo = ref(false);
 let isUserInLike = ref(false);
+let isUserInRt = ref(false);
 
 
 
 function checkAbo() {
-    console.log("theUser:", theUser.value);
-    console.log("usersAbo:", usersAbo.value);
 
     for (const user of usersAbo.value) {
         // Check if the utilisateurid of theUser matches any utilisateurid in usersAbo
@@ -55,21 +56,34 @@ function checkAbo() {
 }
 
 function checkLike() {
-    console.log("theUser:", theUser.value);
-    console.log("like:", likes.value);
+    if (likes.value.length > 0) {
 
-    for (const user of likes.value) {
-        // Check if the utilisateurid of theUser matches any utilisateurid in usersAbo
-        if (user.utilisateurid === theUser.value.utilisateurid) {
-            // If found, set isUserInAbo to true and exit the loop
-            isUserInLike.value = true;
-            return;
+        for (const user of likes.value) {
+
+            // Check if the utilisateurid of theUser matches any utilisateurid in usersAbo
+            if (user.utilisateurid === users.user.utilisateurid) {
+                // If found, set isUserInAbo to true and exit the loop
+                isUserInLike.value = true;
+                return;
+            }
         }
     }
 }
 
+function checkRt() {
+    if (rts.value.length > 0) {
 
+        for (const user of rts.value) {
 
+            // Check if the utilisateurid of theUser matches any utilisateurid in usersAbo
+            if (user.utilisateurid === users.user.utilisateurid) {
+                // If found, set isUserInAbo to true and exit the loop
+                isUserInRt.value = true;
+                return;
+            }
+        }
+    }
+}
 
 
 function addFollow(abonneur, abonne) {
@@ -89,7 +103,7 @@ function removeFollow(abonneur, abonne) {
 
 
 function addLike() {
-    posts.like(theUser.value.utilisateurid, props.post.postid)
+    posts.like(users.user.utilisateurid, props.post.postid)
 }
 
 function removeLike(abonneur, abonne) {
@@ -100,9 +114,18 @@ function removeLike(abonneur, abonne) {
     })
 }
 
-function rt() {
-    posts.rt(theUser.value.utilisateurid, props.post.postid)
+function addRt() {
+    posts.rt(users.user.utilisateurid, props.post.postid)
 }
+
+function removeRt(abonneur, abonne) {
+    console.log(abonneur)
+    posts.unrt({
+        id: parseInt(abonneur),
+        postid: parseInt(abonne)
+    })
+}
+
 
 </script>
 
@@ -111,6 +134,7 @@ function rt() {
     <div class="post-card" v-if="theUser">
         {{ checkAbo() }}
         {{ checkLike() }}
+        {{ checkRt() }}
         <div class="post-head">
             <img :src="'/img/' + theUser.urlphotoprofil" class="user-profile-pic" alt="Profile Picture">
             <div class="user-info">{{ theUser.pseudo }}<img class="icon" src="/img/Twitter_Verified_Badge.svg"
@@ -158,19 +182,30 @@ function rt() {
                         d="M8.625 9.75a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0h-.375m-13.5 3.01c0 1.6 1.123 2.994 2.707 3.227 1.087.16 2.185.283 3.293.369V21l4.184-4.183a1.14 1.14 0 0 1 .778-.332 48.294 48.294 0 0 0 5.83-.498c1.585-.233 2.708-1.626 2.708-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z" />
                 </svg>
             </div>
-            <div class="retweet" @click="rt">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                    stroke="currentColor" class="icon">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 0 0-3.7-3.7 48.678 48.678 0 0 0-7.324 0 4.006 4.006 0 0 0-3.7 3.7c-.017.22-.032.441-.046.662M19.5 12l3-3m-3 3-3-3m-12 3c0 1.232.046 2.453.138 3.662a4.006 4.006 0 0 0 3.7 3.7 48.656 48.656 0 0 0 7.324 0 4.006 4.006 0 0 0 3.7-3.7c.017-.22.032-.441.046-.662M4.5 12l3 3m-3-3-3 3" />
-                </svg>
-
+            <div class="retweet">
+                <div v-if="isUserInRt">
+                    <div @click="removeRt(users.user.utilisateurid, props.post.postid)">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="blue" class="icon">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 0 0-3.7-3.7 48.678 48.678 0 0 0-7.324 0 4.006 4.006 0 0 0-3.7 3.7c-.017.22-.032.441-.046.662M19.5 12l3-3m-3 3-3-3m-12 3c0 1.232.046 2.453.138 3.662a4.006 4.006 0 0 0 3.7 3.7 48.656 48.656 0 0 0 7.324 0 4.006 4.006 0 0 0 3.7-3.7c.017-.22.032-.441.046-.662M4.5 12l3 3m-3-3-3 3" />
+                        </svg>
+                    </div>
+                </div>
+                <div v-else>
+                    <div @click="addRt(users.user.utilisateurid, props.post.postid)">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="icon">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 0 0-3.7-3.7 48.678 48.678 0 0 0-7.324 0 4.006 4.006 0 0 0-3.7 3.7c-.017.22-.032.441-.046.662M19.5 12l3-3m-3 3-3-3m-12 3c0 1.232.046 2.453.138 3.662a4.006 4.006 0 0 0 3.7 3.7 48.656 48.656 0 0 0 7.324 0 4.006 4.006 0 0 0 3.7-3.7c.017-.22.032-.441.046-.662M4.5 12l3 3m-3-3-3 3" />
+                        </svg>
+                    </div>
+                </div>
+                <p>{{ rts.length }}</p>
             </div>
-            {{ users.user }}
-            {{ users.user.utilisateurid }}
             <div class="like">
                 <div v-if="isUserInLike">
-                    <div @click="removeLike(users.user.utilisateurid,props.post.postid)">
+                    <div @click="removeLike(users.user.utilisateurid, props.post.postid)">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="red" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="icon">
                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -179,7 +214,7 @@ function rt() {
                     </div>
                 </div>
                 <div v-else>
-                    <div @click="addLike(users.user.utilisateurid,props.post.postid)">
+                    <div @click="addLike(users.user.utilisateurid, props.post.postid)">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="icon">
                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -187,7 +222,7 @@ function rt() {
                         </svg>
                     </div>
                 </div>
-                <!-- <p>{{ likes.value }}</p> -->
+                <p>{{ likes.length }}</p>
 
             </div>
 
@@ -196,6 +231,10 @@ function rt() {
 </template>
 
 <style scoped>
+.like, .retweet {
+    display: flex;
+}
+
 .middle {
     border-left: 2px solid #0000004d;
     border-right: 2px solid #0000004d;
