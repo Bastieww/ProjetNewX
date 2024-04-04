@@ -25,7 +25,7 @@ Notre projet actuel vise à créer une plateforme ressemblant à Twitter en util
 
 ### Début de l'installation : 
 
-1. Télécharger le Docker Compose : [Télécharger le Docker Compose]()
+1. Télécharger le Docker Compose : [Télécharger le Docker Compose](https://github.com/Bastieww/ProjetNewX/releases/tag/0.1)
 
 2. Extraire l'archive du Docker Compose.
 
