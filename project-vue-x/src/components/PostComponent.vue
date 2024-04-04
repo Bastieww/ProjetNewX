@@ -14,7 +14,8 @@ const newAnsweringPost = ref("")
 var theUser = ref(null)
 var usersAbo = ref([])
 
-var likes = ref(null)
+var likes = ref([])
+
 posts.getLikes(props.post.postid).then(response => likes.value = response.data)
 
 users.getById(props.post.utilisateurid).then(response => theUser.value = response.data)
@@ -35,6 +36,7 @@ function answer() {
 
 
 let isUserInAbo = ref(false);
+let isUserInLike = ref(false);
 
 
 
@@ -51,6 +53,21 @@ function checkAbo() {
         }
     }
 }
+
+function checkLike() {
+    console.log("theUser:", theUser.value);
+    console.log("like:", likes.value);
+
+    for (const user of likes.value) {
+        // Check if the utilisateurid of theUser matches any utilisateurid in usersAbo
+        if (user.utilisateurid === theUser.value.utilisateurid) {
+            // If found, set isUserInAbo to true and exit the loop
+            isUserInLike.value = true;
+            return;
+        }
+    }
+}
+
 
 
 
@@ -71,8 +88,16 @@ function removeFollow(abonneur, abonne) {
 }
 
 
-function like() {
+function addLike() {
     posts.like(theUser.value.utilisateurid, props.post.postid)
+}
+
+function removeLike(abonneur, abonne) {
+    console.log(abonneur)
+    posts.unlike({
+        id: parseInt(abonneur),
+        postid: parseInt(abonne)
+    })
 }
 
 function rt() {
@@ -85,6 +110,7 @@ function rt() {
 
     <div class="post-card" v-if="theUser">
         {{ checkAbo() }}
+        {{ checkLike() }}
         <div class="post-head">
             <img :src="'/img/' + theUser.urlphotoprofil" class="user-profile-pic" alt="Profile Picture">
             <div class="user-info">{{ theUser.pseudo }}<img class="icon" src="/img/Twitter_Verified_Badge.svg"
@@ -140,13 +166,27 @@ function rt() {
                 </svg>
 
             </div>
-            <div class="like" @click="like">
-
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                    stroke="currentColor" class="icon">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
-                </svg>
+            {{ users.user }}
+            {{ users.user.utilisateurid }}
+            <div class="like">
+                <div v-if="isUserInLike">
+                    <div @click="removeLike(users.user.utilisateurid,props.post.postid)">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="red" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="icon">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
+                        </svg>
+                    </div>
+                </div>
+                <div v-else>
+                    <div @click="addLike(users.user.utilisateurid,props.post.postid)">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="icon">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
+                        </svg>
+                    </div>
+                </div>
                 <!-- <p>{{ likes.value }}</p> -->
 
             </div>

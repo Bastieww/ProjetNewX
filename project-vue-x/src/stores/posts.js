@@ -20,9 +20,9 @@ export const usePostStore = defineStore('posts', () => {
             //utilisateurId: utilisateurId,
         }
         axios.post(url + "posts/add", newPost).then(response => {
-            thePosts.value.splice(0, 0, newPost)
+            location.reload()
         })
-        location.reload()
+    
     }
 
     function answer(texte, idansweredpost) {
@@ -35,21 +35,22 @@ export const usePostStore = defineStore('posts', () => {
             //utilisateurId: utilisateurId,
         }
         axios.post(url + "posts/add", newPost).then(response => {
-            thePosts.value.splice(0, 0, newPost)
+
+            location.reload()
         })
-        location.reload()
     }
 
     async function getLikes(postid) {
-        let u = await axios.get(url + "nbrlike?id=" + postid)
+        let u = await axios.get(url + "qui_a_like?id=" + postid)
         return u
     }
+    
 
     axios.get(url + "posts").then(response => {
         var temp = Array.from(response.data).filter(p => p.pos_postid == null)//Enleve les posts "enfants"
         temp.sort((a, b) => a.postid < b.postid ? 1 : -1)
         thePosts.value = temp
-    })                                                                                                              //OOOOOUUUUOUOUUUU LE CODE GOOOFFYYYY BY BASTIEWWW
+    })                                                                        //OOOOOUUUUOUOUUUU LE CODE GOOOFFYYYY BY BASTIEWWW
 
     axios.get(url + "posts").then(response => {
         var temp = Array.from(response.data).filter(p => p.pos_postid != null)//Ne garde que les posts "enfants"
@@ -63,9 +64,19 @@ export const usePostStore = defineStore('posts', () => {
             postid : parseInt(id)
         }
         axios.post(url+"like",temp).then(response => {
-            return response.data;
+            location.reload();
         }
         )
+    }
+
+    async function unlike(ids) {
+        try {
+            const response = await axios.delete(url + "like/del",{params: ids});
+            location.reload();
+            console.log(response);
+        } catch (error) {
+            console.error(error);
+        }
     }
 
     function rt(iduser, id)
@@ -80,5 +91,5 @@ export const usePostStore = defineStore('posts', () => {
         )
     }
 
-    return { thePosts, thePostsChilds, post, answer,getLikes, like, rt }
+    return { thePosts, thePostsChilds, post, answer,getLikes, like, rt, unlike }
 })

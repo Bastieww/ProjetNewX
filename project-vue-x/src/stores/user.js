@@ -15,8 +15,8 @@ export const useUserStore = defineStore('users', () => {
     function addFollow(idsusers) {
         axios.post(url + "abonne", idsusers).then(response => {
             console.log(response)
+            location.reload();
         })
-        location.reload();
     }
 
     async function removeFollow(idsusers) {
@@ -24,11 +24,11 @@ export const useUserStore = defineStore('users', () => {
             const response = await axios.delete(url + "abonne/del", {
                 data: idsusers
             });
+            location.reload();
             console.log(response);
         } catch (error) {
             console.error(error);
         }
-        location.reload();
     }
 
     function update(data) {
