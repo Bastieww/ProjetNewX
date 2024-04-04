@@ -30,7 +30,7 @@ const users = useUserStore()
         </svg>
 
         <MenuComponent menuTEXT="Home" to="/"></MenuComponent>
-        <div v-if="users.user"><MenuComponent menuTEXT="Explore" to="/search"></MenuComponent></div>
+        <MenuComponent menuTEXT="Explore" to="/search"></MenuComponent>
         <div v-if="users.user"><MenuComponent menuTEXT="Profile" to="/profile"></MenuComponent></div>
       </nav>
 
