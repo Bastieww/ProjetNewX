@@ -31,7 +31,7 @@ const users = useUserStore()
 
         <MenuComponent menuTEXT="Home" to="/"></MenuComponent>
         <MenuComponent menuTEXT="Explore" to="/search"></MenuComponent>
-        <MenuComponent menuTEXT="Profile" to="/profile"></MenuComponent>
+        <div v-if="users.user"><MenuComponent menuTEXT="Profile" to="/profile"></MenuComponent></div>
       </nav>
 
       <div class="col2">

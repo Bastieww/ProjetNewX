@@ -36,7 +36,9 @@ function register() {
     user.register({
       pseudo: newpseudo.value,
       motdepasse: newpasswd.value,
-      mail: newmail.value
+      mail: newmail.value,
+      date: new Date().toISOString(),
+      urlphotoprofil: "default.png"
     });
     
   } else {
@@ -72,8 +74,8 @@ function register() {
       <div>
       <button @click="creatingNewAccountSwap">Pas de compte ? Créez-en un !</button>
       <div v-if="creatingNewAccount">
-        <input v-model="newpseudo" placeholder="Pseudo..." required>
-        <input v-model="newpasswd" placeholder="Mot de passe..." required>
+        <input v-model="newpseudo" placeholder="Pseudo..." >
+        <input v-model="newpasswd" placeholder="Mot de passe...">
         <input v-model="newmail" placeholder="Mail..." type="email">
         <button @click="register">Créer le compte
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"

@@ -6,9 +6,6 @@ import { createPinia } from 'pinia';
 const props = defineProps({
     post: {
         required: true
-    },
-    isFollowed: {
-        required: true
     }
 })
 const users = useUserStore()
@@ -34,6 +31,28 @@ function answeringSwap() {
 function answer() {
     posts.answer(newAnsweringPost.value, props.post.postid)
 }
+
+
+
+let isUserInAbo = ref(false);
+
+
+
+function checkAbo() {
+    console.log("theUser:", theUser.value);
+    console.log("usersAbo:", usersAbo.value);
+
+        for (const user of usersAbo.value) {
+            // Check if the utilisateurid of theUser matches any utilisateurid in usersAbo
+            if (user.utilisateurid === theUser.value.utilisateurid) {
+                // If found, set isUserInAbo to true and exit the loop
+                isUserInAbo.value = true;
+                return;
+            }
+}}
+
+
+
 
 function addFollow(abonneur, abonne) {
     console.log(abonneur)
@@ -62,11 +81,13 @@ function rt() {
 </script>
 
 <template>
+ 
     <div class="post-card" v-if="theUser">
+        {{ checkAbo() }}
         <div class="post-head">
             <img :src="'/img/' + theUser.urlphotoprofil" class="user-profile-pic" alt="Profile Picture">
             <div class="user-info">{{ theUser.pseudo }}</div>
-                <div v-if="isFollowed">
+                <div v-if="isUserInAbo">
                     <button class="btunfollow" @click="removeFollow(users.user.utilisateurid, theUser.utilisateurid)">
                         <span>Following</span>
                     </button>

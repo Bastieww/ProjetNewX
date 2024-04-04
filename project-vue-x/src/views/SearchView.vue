@@ -13,13 +13,6 @@ const filteredUsers = computed(() =>{
 })
 
 
-if(!users.user)
-{
-    const router = useRouter()
-    router.push({name:"home"})
-}
-
-
 watchEffect(() => {
   filteredUsers.value // Trigger reactivity
 })
@@ -101,12 +94,6 @@ watchEffect(() => {
   margin: 30px;
 
   border-color: gray ;
-}
-
-.search:focus
-{
-  transform: scale(0.5) 
-  
 }
 
 img

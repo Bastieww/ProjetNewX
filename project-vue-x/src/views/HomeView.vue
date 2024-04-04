@@ -1,7 +1,7 @@
 <script setup>
 import { usePostStore } from '@/stores/posts'
 import { useUserStore } from '@/stores/user'
-import { ref, computed} from 'vue'
+import { ref, computed } from 'vue'
 import VueSession from 'vue-session'
 import PostComponent from '@/components/PostComponent.vue'
 import NewPostComponent from '@/components/NewPostComponent.vue'
@@ -19,12 +19,6 @@ function post() {
 
 function getAbonne() {
   user.getEstAbonne(user.user.utilisateurid).then(response => usersAbo.value = response.data)
-}
-function followTrue() {
-  followed = true
-}
-function followFalse() {
-  followed = false
 }
 </script>
 
@@ -50,33 +44,18 @@ function followFalse() {
           </button>
         </div>
       </div>
-      
+
       <div v-if="!user.user">
         <Auth />
       </div>
-      
+
       <div v-else>
-
-       
         <div class="post-list" v-for="thepost in posts.thePosts">
-          <div v-for="abonne in usersAbo">
-            <div v-if="abonne.utilisateurid == thepost.utilisateurid">
-              {{ followTrue() }}
-            </div>
-          </div>
-          <PostComponent :isFollowed="followed" :post="thepost"></PostComponent>
-          {{ followFalse() }}
-
+          <PostComponent :post="thepost"></PostComponent>
           <div class="childs">
             <div class="uwu"
-            v-for="thepostchild in posts.thePostsChilds.filter(child => child.pos_postid == thepost.postid)">
-              <div v-for="abonne in usersAbo">
-                <div v-if="abonne.utilisateurid == thepost.utilisateurid">
-                  {{ followTrue() }}
-                </div>
-              </div>
-              <PostComponent :isFollowed="followed" :post="thepostchild"></PostComponent>
-              {{ followFalse() }}
+              v-for="thepostchild in posts.thePostsChilds.filter(child => child.pos_postid == thepost.postid)">
+              <PostComponent :post="thepostchild"></PostComponent>
             </div>
           </div>
         </div>
@@ -90,6 +69,7 @@ function followFalse() {
   margin-left: 50px;
   margin-bottom: 40px;
 }
+
 .btenvoi {
   display: flex;
   flex-direction: row;

@@ -101,13 +101,14 @@ app.put("/utilisateur/edit", async (req, res) => {
     if (req.query.id) {
         try {
 
-            const users = await prisma.utilisateur.update({
+            const utilisateur = await prisma.utilisateur.update({
                 where: {
                     utilisateurid: parseInt(req.query.id)
                 },
                 data:
                     req.body
             })
+            res.status(200).json(utilisateur);
 
         } catch (error) {
             res.status(500).json({ error: error });
@@ -197,26 +198,27 @@ app.post("/abonne", async (req, res) => {
 })
 
 app.delete("/abonne/del", async (req, res) => {
-    res.status().json(req)
-    if (req.body.utilisateurid && req.body.uti_utilisateurid) {
+    const { utilisateurid, uti_utilisateurid } = req.body;
+    if (utilisateurid && uti_utilisateurid) {
         try {
-            const abonne = await prisma.est_abonne.delete({
+            await prisma.est_abonne.delete({
                 where: {
                     utilisateurid_uti_utilisateurid: {
-                        utilisateurid: req.query.utilisateurid,
-                        uti_utilisateurid: req.query.uti_utilisateurid
+                        utilisateurid: utilisateurid,
+                        uti_utilisateurid: uti_utilisateurid
                     }
                 }
-            })
+            });
             res.status(204).json();
         } catch (error) {
-            res.status(500).json({ error: error });
+            console.error(error);
+            res.status(500).json({ error: "Internal server error" });
         }
+    } else {
+        res.status(400).json({ error: "Parameters 'utilisateurid' and/or 'uti_utilisateurid' missing in DELETE request" });
     }
-    else {
-        res.status(400).json({ error: "Paramètre 'id' et/ou 'idabonne' manquant dans la requête DELETE" });
-    }
-})
+    
+});
 
 /**
  * 

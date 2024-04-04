@@ -16,23 +16,32 @@ export const useUserStore = defineStore('users', () => {
         axios.post(url + "abonne", idsusers).then(response => {
             console.log(response)
         })
+        location.reload();
     }
 
-    function removeFollow(idsusers) {
-        console.log(idsusers)
-        console.log(url + "abonne/del")
-
-        axios.delete(url + "abonne/del", idsusers).then(response => {
-            console.log(response)
-        })
+    async function removeFollow(idsusers) {
+        try {
+            const response = await axios.delete(url + "abonne/del", {
+                data: idsusers
+            });
+            console.log(response);
+        } catch (error) {
+            console.error(error);
+        }
+        location.reload();
     }
+
+    function update(data) {
+        axios.put(url+"utilisateur/edit?id="+user.value.utilisateurid,data).then(response => {
+            user.value = response.data;
+            // Save user to session storage
+            sessionStorage.setItem('user', JSON.stringify(response.data));
+            location.reload();
+    })}
 
     function login(auth) {
         axios.post(url + "login", auth)
             .then(response => {
-                console.log("Response status:", response.status);
-                console.log("Response data:", response.data);
-
                 user.value = response.data;
                 // Save user to session storage
                 sessionStorage.setItem('user', JSON.stringify(response.data));
@@ -69,5 +78,6 @@ export const useUserStore = defineStore('users', () => {
         return abo
     }
 
-    return { theUsers, user, addFollow, removeFollow, getById, getEstAbonne, getQuiEstAbonne, login, register }
+
+    return { theUsers, user, addFollow, removeFollow, getById, getEstAbonne, getQuiEstAbonne, login, register, update }
 })

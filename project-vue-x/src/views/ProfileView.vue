@@ -1,22 +1,54 @@
 <script setup>
 import { useUserStore } from '@/stores/user'
 import User from '@/components/User.vue'
+import { useRouter } from 'vue-router';
 import { ref, computed, defineComponent } from 'vue';
+
 const users = useUserStore()
+if (!users.user) {
+  const router = useRouter()
+  router.push({ name: "home" })
+}
+
+const editpseudo = ref("")
+const editpasswd = ref("")
+const editmail = ref("")
+const editbio = ref("")
+
+let editingProfile = ref(false)
+
+function editingProfileSwap() {
+  editingProfile.value = !editingProfile.value
+  editpseudo.value = users.user.pseudo
+  editpasswd.value = users.user.motdepasse
+  editmail.value = users.user.mail
+  editbio.value = users.user.bio
+}
+
+function edit() {
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  
+  if (editpseudo.value && editpasswd.value && editmail.value && emailRegex.test(editmail.value)) {
+    users.update({
+      pseudo: editpseudo.value,
+      motdepasse: editpasswd.value,
+      mail: editmail.value,
+      bio:  editbio.value
+    });
+    
+  } else {
+    alert("Pseudo,password and mail are required and email must be in a valid format");
+  }
+}
+
 var usersAbo = ref([])
 var usersFollowers = ref([])
-let user = users.user
 users.getEstAbonne(users.user.utilisateurid).then(response => usersAbo.value = response.data)
 users.getQuiEstAbonne(users.user.utilisateurid).then(response => usersFollowers.value = response.data)
 
-if(!users.user)
-{
-    const router = useRouter()
-    router.push({name:"home"})
-}
 </script>
 <template>
-  <div v-if="usersAbo && usersFollowers"></div>
+  <div v-if="usersAbo && usersFollowers"></div><!-- Malicieux stratagème pour charger les variables -->
   <div class="user-container">
     <div>
       <div class="title">
@@ -25,29 +57,44 @@ if(!users.user)
           <path onclick="javascript:history.go(-1);" stroke-linecap="round" stroke-linejoin="round"
             d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
         </svg>
-        <h1>{{ user.pseudo }}</h1>
+        <h1>{{ users.user.pseudo }}</h1>
       </div>
       <div class="user">
         <div class="user-images" style="display: flex;">
           <div class="banner"></div>
           <p class="profile-background"></p>
-          <img :src="'/img/' + user.urlphotoprofil" class="user-profile-pic" alt="Profile Picture">
+          <img :src="'/img/' + users.user.urlphotoprofil" class="user-profile-pic" alt="Profile Picture">
         </div>
-        <div class="edit-container">
-          <button class="edit-profile-btn">Editer le profil</button>
-        </div>
-        <div class="user-info">
-          <h2>{{ user.pseudo }}</h2>
-          <p class="user-bio">{{ user.bio }}</p>
-          <p>Rejoint le {{ user.date }}</p>
-          <div>
-            <div style="display: flex;">
-              <p>Follows : {{ usersAbo.length }}</p>
-            </div>
-            <div style="display: flex;">
-              <p>Followers : {{ usersFollowers.length }}</p>
+        <div v-if="!editingProfile">
+          <div class="edit-container">
+            <button class="edit-profile-btn" @click="editingProfileSwap">Editer le profil</button>
+          </div>
+          <div class="user-info">
+            <h2>{{ users.user.pseudo }}</h2>
+            <p class="user-bio">{{ users.user.bio }}</p>
+            <p>Membre depuis le {{ users.user.date }}</p>
+            <div>
+              <div style="display: flex;">
+                <p>Follows : {{ usersAbo.length }}</p>
+              </div>
+              <div style="display: flex;">
+                <p>Followers : {{ usersFollowers.length }}</p>
+              </div>
             </div>
           </div>
+        </div>
+        <div v-else class="temp">
+          <input v-model="editpseudo" >
+          <input v-model="editpasswd" >
+          <input v-model="editmail" type="email">
+          <input v-model="editbio" >
+          
+          <button @click="edit">Modifier
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+              stroke="currentColor" class="icon">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+            </svg>
+          </button>
         </div>
       </div>
     </div>
@@ -56,6 +103,10 @@ if(!users.user)
 
 
 <style scoped>
+.temp {
+  margin-top: 100px;
+}
+
 .banner {
   background-color: #cfd9de;
   padding-left: 800px;
