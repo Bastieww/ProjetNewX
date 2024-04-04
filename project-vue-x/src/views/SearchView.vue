@@ -4,6 +4,11 @@ import {useUserStore} from '@/stores/user'
 import User from '@/components/User.vue'
 import { ref,computed, watchEffect  } from 'vue';
 const users = useUserStore()
+if (!users.user) {
+  const router = useRouter()
+  router.push({ name: "home" })
+}
+
 
 const filter = ref("")
 
