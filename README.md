@@ -121,3 +121,5 @@ Les Vues communiquent avec les Stores, qui font la passerelle vers le serveur se
 
 Ce dernier communique avec la base pour les différents changements de données.
 
+Consultez ce diaporama pour en apprendre plus sur le fonctionnement du site : [`Présentation`](https://docs.google.com/presentation/d/1LGxcQArrM6EibwDehIb7-v8MsAgkGxbeimP6QWGH5ug/edit?usp=sharing)
+
