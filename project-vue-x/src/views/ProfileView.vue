@@ -57,7 +57,7 @@ users.getQuiEstAbonne(users.user.utilisateurid).then(response => usersFollowers.
           <path onclick="javascript:history.go(-1);" stroke-linecap="round" stroke-linejoin="round"
             d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
         </svg>
-        <h1>{{ users.user.pseudo }}</h1>
+        <h1>@{{ users.user.pseudo }} <img class="icon" src="/img/Twitter_Verified_Badge.svg" v-if="users.user.certifie"></h1>
       </div>
       <div class="user">
         <div class="user-images" style="display: flex;">
@@ -103,19 +103,50 @@ users.getQuiEstAbonne(users.user.utilisateurid).then(response => usersFollowers.
 
 
 <style scoped>
+input 
+{
+  width: 80%;
+  border-radius: 8px;
+  border: solid gray 3px;
+  padding: 5px;
+  margin: 5px;
+}
+
+h1{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
 .temp {
   margin-top: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+button
+{
+  display: flex;
+  align-items: center;
+
+  padding: 10px;
+  justify-content: center;
+  width: 25%;
+  
+  border-radius: 8px;
 }
 
 .banner {
   background-color: #cfd9de;
   padding-left: 800px;
   padding-top: 250px;
-  width: auto;
+  width: 100%;
 }
 
 .edit-container {
   margin: 10px 0px 20px 650px;
+  
 }
 
 .edit-profile-btn {
@@ -174,4 +205,10 @@ users.getQuiEstAbonne(users.user.utilisateurid).then(response => usersFollowers.
 
   border-left: 1px solid #0000006b
 }
+
+.icon {
+  height: 30px;
+  width: 30px;
+  margin-right: 10px;
+} 
 </style>

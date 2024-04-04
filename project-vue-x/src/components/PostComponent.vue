@@ -86,7 +86,7 @@ function rt() {
         {{ checkAbo() }}
         <div class="post-head">
             <img :src="'/img/' + theUser.urlphotoprofil" class="user-profile-pic" alt="Profile Picture">
-            <div class="user-info">{{ theUser.pseudo }}</div>
+            <div class="user-info">{{ theUser.pseudo }}<img class="icon" src="/img/Twitter_Verified_Badge.svg" v-if="users.user.certifie"></div>
                 <div v-if="isUserInAbo">
                     <button class="btunfollow" @click="removeFollow(users.user.utilisateurid, theUser.utilisateurid)">
                         <span>Following</span>
@@ -257,4 +257,10 @@ function rt() {
     margin-right: 10px;
     cursor: pointer;
 }
+
+.iconcertif {
+  height: 30px;
+  width: 30px;
+  margin-right: 10px;
+} 
 </style>
