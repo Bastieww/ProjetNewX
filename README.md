@@ -109,11 +109,11 @@ Ici, la commande 'docker compose up' permet de créer 4 images :
 - pgadmin
      `correspond à l'interface pgAdmin, permettant d'interagir directement avec la base`
 
-  Ces images sont ensuite utilisées pour créer un container sur lequel tournent le client, le serveur, la base et pgAdmin.
+Ces images sont ensuite utilisées pour créer un container sur lequel tournent le client, le serveur, la base et pgAdmin.
 
-  ### Dans le container :
+### Dans le container :
 
-  Le client se base sur le framework Vuejs [![Vue.js](https://img.shields.io/badge/Vue.js-3.4.21-lightgreen?style=flat&logo=vuedotjs&link=https://vuejs.org)](https://vuejs.org)
-  Les Vues communiquent avec les Stores, qui font la passerelle vers le serveur servant d'API.
-  Ce dernier communique avec la base pour les différents changements de données.
+Le client se base sur le framework Vuejs [![Vue.js](https://img.shields.io/badge/Vue.js-3.4.21-lightgreen?style=flat&logo=vuedotjs&link=https://vuejs.org)](https://vuejs.org)
+Les Vues communiquent avec les Stores, qui font la passerelle vers le serveur servant d'API.
+Ce dernier communique avec la base pour les différents changements de données.
 
