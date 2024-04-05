@@ -38,11 +38,26 @@ Notre projet actuel vise à créer une plateforme ressemblant à Twitter en util
 ```bat
 docker compose up
 ```
+
+Ici, la commande `docker compose up` permet d'executer un groupe de 4 images docker  : 
+- clientapiy 
+  > Image correspondant au client Web. (Vue.js)
+
+- apiy 
+  > Image correspondant à l'API Web. (Node.js)
+
+- dbapiy 
+  > Image correspondant à la base de données. (PostgreSQL)
+
+- pgadmin 
+  > Image correspondant au client Web de PostgreSQL. (Pour les intéractions directe avec la base de données)
+
 ### Le projet se lance normalement. 
 
 - - -
 ### Problème possible :
 - Si docker n'est pas reconnu comme commande, vérifier que docker soit bien dans le PATH du système ou de l'utilisateur
+- Si vous rencontrez cette erreur : `ERROR: permission denied while trying to connect to the Docker daemon socket`. Démarrer Docker par Docker Desktop ou par commande.
 
 # Accédez au projet
 
@@ -92,34 +107,7 @@ Mot de passe : `postgres`
 ![WhereIsIt](https://media.discordapp.net/attachments/1220735136220577953/1225090525552705627/Screenshot_20240403_160502.png?ex=661fdd76&is=660d6876&hm=afa110f4acf214ddb7840c88479d0cbbd37628b34dd773d2d3807e79f69a28de&=&format=webp&quality=lossless&width=1096&height=253)
 
 
-----------------------------------------------------------------------
-# Principe de fonctionnement
-### docker compose :
-
-Ici, la commande 'docker compose up' permet de créer 4 images :
-- clientapiy
-     `correspond au client Vue`
-  
-- apiy
-     `correspond au server node qui sert d'API`
-  
-- dbapiy
-     `correspond à la base de données PostgreSQL`
-
-- pgadmin
-     `correspond à l'interface pgAdmin, permettant d'interagir directement avec la base`
-
-Ces images sont ensuite utilisées pour créer un container sur lequel tournent le client, le serveur, la base et pgAdmin.
-
-### Dans le container :
-
-Le client se base sur le framework Vuejs [![Vue.js](https://img.shields.io/badge/Vue.js-3.4.21-lightgreen?style=flat&logo=vuedotjs&link=https://vuejs.org)](https://vuejs.org)
-
-
-Les Vues communiquent avec les Stores, qui font la passerelle vers le serveur servant d'API.
-
-
-Ce dernier communique avec la base pour les différents changements de données.
-
-Consultez ce diaporama pour en apprendre plus sur le fonctionnement du site : [`Présentation`](https://docs.google.com/presentation/d/1LGxcQArrM6EibwDehIb7-v8MsAgkGxbeimP6QWGH5ug/edit?usp=sharing)
+- - -
+### Pour en savoir plus :
+Consultez ce diaporama pour en apprendre plus sur le fonctionnement du site : [Présentation](https://docs.google.com/presentation/d/1LGxcQArrM6EibwDehIb7-v8MsAgkGxbeimP6QWGH5ug/edit?usp=sharing)
 
